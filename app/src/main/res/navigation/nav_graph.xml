@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/homeFragment2"
+        android:id="@+id/homeFragment"
         android:name="com.frezzcoding.savingsguru.functionalities.home.HomeFragment"
+        tools:layout="@layout/fragment_home"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.frezzcoding.savingsguru.functionalities.newscenario.NewScenarioFragment"
+        tools:layout="@layout/fragment_newscenario"
+        android:label="NewScenarioFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.frezzcoding.savingsguru.functionalities.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/graphsFragment"
+        android:name="com.frezzcoding.savingsguru.functionalities.graphs.GraphsFragment"
+        tools:layout="@layout/fragment_graph"
+        android:label="GraphsFragment" />
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.frezzcoding.savingsguru.functionalities.statistics.StatisticsFragment"
+        tools:layout="@layout/fragment_statistics"
+        android:label="StatisticsFragment" />
 </navigation>
