@@ -3,8 +3,19 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/app_name"
+        android:icon="@drawable/ic_money"
+        android:title="@string/money"
     />
+
+    <item
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/ic_stats"
+        android:title="@string/stats"
+        />
+    <item
+        android:id="@+id/graphsFragment"
+        android:icon="@drawable/ic_graphs"
+        android:title="@string/graphs"
+        />
 
 </menu>
