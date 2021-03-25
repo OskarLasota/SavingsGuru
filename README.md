@@ -2,7 +2,7 @@
 
 ## Tech Stack & Open-Library Sources : 
 + Minimum SDK level 21
-+ 100% Kotlin based 
++ 100% Kotlin  
 + RxJava
 + Unit Testing
 + Integration Testing
