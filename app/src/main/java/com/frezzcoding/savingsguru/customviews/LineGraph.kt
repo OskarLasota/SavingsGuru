@@ -16,6 +16,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var mYUnit = 0f
     private var mBlackPaint: Paint
     private lateinit var dataPoints : List<Int> //make data object to hold date & value
+    private var highestValue : Int = 0
+    private var amountOfValues : Int = 0
 
     init {
         mPaint = Paint()
@@ -28,19 +30,23 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         mBlackPaint.color = Color.BLACK
         mBlackPaint.style = Paint.Style.STROKE
         mBlackPaint.strokeWidth = 10F
-        mXUnit = (width / 12).toFloat() // 10 plots for x axis and 2 left for padding
-        mYUnit = (height / 12).toFloat()
+        mXUnit = (width / amountOfValues).toFloat() // 10 plots for x axis and 2 left for padding
+        mYUnit = (height / highestValue).toFloat()
 
         mPaint.style = Paint.Style.STROKE
         mPaint.strokeWidth = 10F
         mPaint.color = Color.GREEN
         drawAxis(canvas)
         drawGraphPlotLines(canvas)
-        drawGraphPaper(canvas)
+        //drawGraphPaper(canvas)
     }
 
-    fun setDataPoints(data : List<Int>){
-        dataPoints = data
+    fun setDataPoints(data : List<Int>) {
+        if(!data.isNullOrEmpty()) {
+            dataPoints = data
+            highestValue = data.max()!! + (data.max()!! / 10)
+            amountOfValues = data.size + 2
+        }
     }
 
     private fun drawAxis(canvas: Canvas?) {
@@ -67,12 +73,12 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
         mBlackPaint.strokeWidth = 1F
 
-        for (i in 1..11) {
+        for (i in 1..51) {
             canvas?.drawLine(cx, mYUnit, cx, cy, mBlackPaint)
             cx += mXUnit
         }
         cx = mXUnit
-        for(i in 1..11){
+        for(i in 1..51){
             canvas?.drawLine(cx, cy, width - mXUnit, cy, mBlackPaint)
             cy -= mYUnit
         }
