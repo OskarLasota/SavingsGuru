@@ -7,14 +7,18 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.frezzcoding.savingsguru.R
+import com.frezzcoding.savingsguru.common.highestNumber
 
 class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
     private var mPaint: Paint
+    private var mBlackPaint: Paint
+    private var plotPaint : Paint
     private var mPath: Path
     private var mXUnit = 0f
     private var mYUnit = 0f
-    private var mBlackPaint: Paint
     private lateinit var dataPoints : List<Int> //make data object to hold date & value
     private var highestValue : Int = 0
     private var amountOfValues : Int = 0
@@ -23,6 +27,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         mPaint = Paint()
         mPath = Path()
         mBlackPaint = Paint()
+        plotPaint = Paint()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -35,7 +40,9 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
         mPaint.style = Paint.Style.STROKE
         mPaint.strokeWidth = 10F
-        mPaint.color = Color.GREEN
+        mPaint.color = ContextCompat.getColor(context, R.color.green)
+
+        plotPaint.color = ContextCompat.getColor(context, R.color.blue)
         drawAxis(canvas)
         drawGraphPlotLines(canvas)
         //drawGraphPaper(canvas)
@@ -44,7 +51,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     fun setDataPoints(data : List<Int>) {
         if(!data.isNullOrEmpty()) {
             dataPoints = data
-            highestValue = data.max()!! + (data.max()!! / 10)
+            highestValue = data.highestNumber() + (data.highestNumber() / 10) // increase proportionally
             amountOfValues = data.size + 2
         }
     }
@@ -61,7 +68,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
         dataPoints.forEach{
             mPath.lineTo(originX + mXUnit, originY - (it * mYUnit))
-            canvas?.drawCircle(originX + mXUnit, originY - (it * mYUnit), 5F, mPaint)
+            canvas?.drawCircle(originX + mXUnit, originY - (it * mYUnit), 10F, plotPaint)
             originX += mXUnit
         }
         canvas?.drawPath(mPath, mPaint)
