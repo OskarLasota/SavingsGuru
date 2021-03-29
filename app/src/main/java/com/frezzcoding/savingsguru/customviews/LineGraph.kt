@@ -49,11 +49,11 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
 
     fun setDataPoints(data : List<Int>) {
-        if(!data.isNullOrEmpty()) {
-            dataPoints = data
-            highestValue = data.highestNumber() + (data.highestNumber() / 10) // increase proportionally
-            amountOfValues = data.size + 2
+        dataPoints = data
+        data.highestNumber()?.let {highestNumber ->
+            highestValue = highestNumber + (highestNumber / 10) // increase proportionally
         }
+        amountOfValues = data.size + 2
     }
 
     private fun drawAxis(canvas: Canvas?) {
