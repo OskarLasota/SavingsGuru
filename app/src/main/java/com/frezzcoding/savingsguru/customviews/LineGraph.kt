@@ -1,10 +1,7 @@
 package com.frezzcoding.savingsguru.customviews
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -16,18 +13,21 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var mPaint: Paint
     private var mBlackPaint: Paint
     private var plotPaint : Paint
+    private var gradientPaint : Paint
     private var mPath: Path
     private var mXUnit = 0f
     private var mYUnit = 0f
     private lateinit var dataPoints : List<Int> //make data object to hold date & value
     private var highestValue : Int = 0
     private var amountOfValues : Int = 0
+    private var zeroY = 0F
 
     init {
         mPaint = Paint()
         mPath = Path()
         mBlackPaint = Paint()
         plotPaint = Paint()
+        gradientPaint = Paint()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -37,15 +37,34 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         mBlackPaint.strokeWidth = 10F
         mXUnit = (width / amountOfValues).toFloat() // 10 plots for x axis and 2 left for padding
         mYUnit = (height / highestValue).toFloat()
-
+        zeroY = (highestValue * (height / highestValue - 0) + paddingTop).toFloat()
         mPaint.style = Paint.Style.STROKE
         mPaint.strokeWidth = 10F
         mPaint.color = ContextCompat.getColor(context, R.color.green)
 
+        //prepare gradient
+        val colors = intArrayOf(R.color.purple_500, R.color.green)
+        val gradient = LinearGradient(
+                mXUnit, paddingTop.toFloat(), 51f, zeroY, colors, null, Shader.TileMode.CLAMP
+        )
+        gradientPaint.style = Paint.Style.FILL
+        gradientPaint.shader = gradient
+
         plotPaint.color = ContextCompat.getColor(context, R.color.blue)
         drawAxis(canvas)
-        drawGraphPlotLines(canvas)
-        //drawGraphPaper(canvas)
+        drawGraphPlotAndLines(canvas)
+        drawGraphFilling(canvas)
+    }
+    private fun drawGraphFilling(canvas: Canvas?){
+        mPath.reset()
+        mPath.moveTo(paddingLeft.toFloat() + mXUnit, height - mYUnit)
+        var iteration = 2
+        dataPoints.forEach {
+            mPath.lineTo(mXUnit*iteration, (height - mYUnit) - (it.toFloat() * mYUnit))
+            iteration ++
+        }
+        mPath.lineTo(mXUnit*(dataPoints.size + 1), height - mYUnit)
+        canvas?.drawPath(mPath, gradientPaint)
     }
 
     fun setDataPoints(data : List<Int>) {
@@ -61,7 +80,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         canvas?.drawLine(10F, height - mYUnit, width - mXUnit, height - mYUnit, mBlackPaint)
     }
 
-    private fun drawGraphPlotLines(canvas: Canvas?){
+    private fun drawGraphPlotAndLines(canvas: Canvas?){
         var originX = mXUnit
         var originY = height - mYUnit
         mPath.moveTo(originX, originY)
@@ -73,22 +92,4 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         }
         canvas?.drawPath(mPath, mPaint)
     }
-
-    private fun drawGraphPaper(canvas: Canvas?){
-        var cx = mXUnit
-        var cy = height - mYUnit
-
-        mBlackPaint.strokeWidth = 1F
-
-        for (i in 1..51) {
-            canvas?.drawLine(cx, mYUnit, cx, cy, mBlackPaint)
-            cx += mXUnit
-        }
-        cx = mXUnit
-        for(i in 1..51){
-            canvas?.drawLine(cx, cy, width - mXUnit, cy, mBlackPaint)
-            cy -= mYUnit
-        }
-    }
-
 }
