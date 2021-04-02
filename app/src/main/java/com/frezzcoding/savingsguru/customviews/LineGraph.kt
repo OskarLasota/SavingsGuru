@@ -20,6 +20,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var xAxisTotal = 0f
     private var yAxisTotal = 0f
     private lateinit var dataPoints : List<Int> //make data object to hold date & value
+    private var highestProportionalValue : Int = 0
     private var highestValue : Int = 0
     private var amountOfValues : Int = 0
     private var zeroY = 0F
@@ -33,21 +34,53 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         gradientPaint = Paint()
     }
 
+    fun setDataPoints(data : List<Int>) {
+        dataPoints = data
+        data.highestNumber()?.let {highestNumber ->
+            highestProportionalValue = highestNumber + (highestNumber / 10) // increase proportionally
+            highestValue = highestNumber
+        }
+        amountOfValues = data.size + 2
+    }
+
+    fun setGraduations(){
+
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         xAxisTotal = (width / amountOfValues).toFloat()
-        yAxisTotal = (height / (highestValue + (if(highestValue < 1) 1 else (highestValue / 10)))).toFloat()
-        zeroY = (highestValue * (height / highestValue - 0) + paddingTop).toFloat()
+        yAxisTotal = (height / (highestProportionalValue + (if(highestProportionalValue < 1) 1 else (highestProportionalValue / 10)))).toFloat()
+        zeroY = (highestProportionalValue * (height / highestProportionalValue - 0) + paddingTop).toFloat()
         initializePaint()
 
         drawGraphPlotAndLines(canvas)
         drawGraphFilling(canvas)
         drawAxis(canvas)
-        drawButtons(canvas)
+        //drawButtons(canvas)
+        drawGraduations(canvas)
+    }
+
+    private fun drawGraduations(canvas: Canvas?){
+        val x = xAxisTotal * (dataPoints.size + 1.3).toFloat() - 20f
+        var y : Float
+        val textPaint = Paint()
+        textPaint.color = Color.GRAY
+        textPaint.style = Paint.Style.FILL_AND_STROKE
+        textPaint.textSize = 40F
+        for(i in 0..6){
+            if(i != 0){
+                y =  zeroY - 80f - ((height / 9) * i)
+                canvas?.drawText(((highestValue / 6) * i).toString(), x, y, textPaint)
+            }else{
+                canvas?.drawText(0.toString(), x, zeroY - 80f, textPaint)
+            }
+        }
+        canvas?.drawText(highestValue.toString(), x, zeroY - 80f - ((height / 9) * 7), textPaint)
     }
 
     private fun drawButtons(canvas: Canvas?){
-        var textPaint = Paint()
+        val textPaint = Paint()
         textPaint.color = Color.GRAY
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textSize = 45F
@@ -58,7 +91,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         var week = 0
         for(i in 0..dataPoints.size step setSize){
             week ++
-            var rect = Rect()
+            val rect = Rect()
             //rect.set((xAxisTotal.toInt() * ((i*1.5) + 1.5)).toInt(), height - 90, xAxisTotal.toInt() * 3, zeroY.toInt())
             //rectPaint.color = Color.DKGRAY
             //rectPaint.style = Paint.Style.STROKE
@@ -94,26 +127,19 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
     private fun drawGraphFilling(canvas: Canvas?){
         mPath.reset()
-        mPath.moveTo(paddingLeft.toFloat() + xAxisTotal, height - yAxisTotal - 100f)
-        var iteration = 2
+        mPath.moveTo(paddingLeft.toFloat() + 0f, height - yAxisTotal - 100f)
+        var iteration = 1
         dataPoints.forEach {
             mPath.lineTo(xAxisTotal*iteration, (height - yAxisTotal) - (it.toFloat() * yAxisTotal) - 100f)
             iteration ++
         }
-        mPath.lineTo(xAxisTotal*(dataPoints.size + 1), height - yAxisTotal - 100f)
+        mPath.lineTo(xAxisTotal*(dataPoints.size), height - yAxisTotal - 100f)
         canvas?.drawPath(mPath, gradientPaint)
     }
 
-    fun setDataPoints(data : List<Int>) {
-        dataPoints = data
-        data.highestNumber()?.let {highestNumber ->
-            highestValue = highestNumber + (highestNumber / 10) // increase proportionally
-        }
-        amountOfValues = data.size + 2
-    }
 
     private fun drawAxis(canvas: Canvas?) {
-        var dottedPaint = Paint()
+        val dottedPaint = Paint()
         dottedPaint.style = Paint.Style.STROKE
         dottedPaint.strokeWidth = 3F
         dottedPaint.pathEffect = DashPathEffect(floatArrayOf(22F, 22F), 0f)
@@ -131,12 +157,12 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
     private fun drawGraphPlotAndLines(canvas: Canvas?){
         var originX = xAxisTotal
-        var originY = height - yAxisTotal
-        mPath.moveTo(originX, originY - 100f)
+        val originY = height - yAxisTotal
+        mPath.moveTo(0f, originY - 100f)
 
         dataPoints.forEach{
-            mPath.lineTo(originX + xAxisTotal, originY - (it * yAxisTotal) - 100f)
-            canvas?.drawCircle(originX + xAxisTotal, originY - (it * yAxisTotal) - 100f, 10F, plotPaint)
+            mPath.lineTo(originX , originY - (it * yAxisTotal) - 100f)
+            canvas?.drawCircle(originX , originY - (it * yAxisTotal) - 100f, 10F, plotPaint)
             originX += xAxisTotal
         }
         canvas?.drawPath(mPath, linePaint)
