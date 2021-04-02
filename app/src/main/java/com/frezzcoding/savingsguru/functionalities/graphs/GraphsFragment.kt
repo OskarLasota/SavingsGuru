@@ -12,7 +12,7 @@ class GraphsFragment : Fragment(R.layout.fragment_graph) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        line_graph.setDataPoints(listOf(15,3,6,1,2,5,21,6,2,1,5,1,3))
+        line_graph.setDataPoints(listOf(15,3,6,1,2,5,41,6,2,1,5,1,3,21,6,2,1,5,1,3))
     }
 
 }
