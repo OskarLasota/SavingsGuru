@@ -63,10 +63,11 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         widthPerItem = ((width - paddingLeft - paddingRight) / amountOfValues).toFloat()
-        heightPerValue = ((height - paddingTop - paddingBottom) / (highestValue - lowestValue)).toFloat()
+        heightPerValue = (((height - paddingTop - paddingBottom) / (highestValue - lowestValue)) * 0.9).toFloat() // 0.9 to make the height smaller
         zeroY = (height - paddingBottom).toFloat()
         initializePaint()
         drawGraphPlotAndLines(canvas)
+        drawGraphFilling(canvas)
         /*
         xAxisTotal = (width / amountOfValues).toFloat()
         yAxisTotal = (height / (highestProportionalValue + (if(highestProportionalValue < 1) 1 else (highestProportionalValue / 10)))).toFloat()
@@ -148,13 +149,13 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
     private fun drawGraphFilling(canvas: Canvas?){
         mPath.reset()
-        mPath.moveTo(paddingLeft.toFloat() + 0f, height - yAxisTotal - 100f)
+        mPath.moveTo(paddingLeft.toFloat() + 0f, zeroY - paddingForButtons)
         var iteration = 1
         dataPoints.forEach {
-            mPath.lineTo(xAxisTotal*iteration, (height - yAxisTotal) - (it.toFloat() * yAxisTotal) - 100f)
+            mPath.lineTo(widthPerItem*iteration + paddingLeft, zeroY - (it.toFloat() * heightPerValue) - paddingForButtons)
             iteration ++
         }
-        mPath.lineTo(xAxisTotal*(dataPoints.size), height - yAxisTotal - 100f)
+        mPath.lineTo(widthPerItem * amountOfValues - paddingRight, zeroY - heightPerValue - paddingForButtons)
         canvas?.drawPath(mPath, gradientPaint)
     }
 
