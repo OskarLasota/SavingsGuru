@@ -16,7 +16,7 @@ class GraphsFragment : Fragment(R.layout.fragment_graph) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         println("set data points")
-        line_graph.setDataPoints(listOf(1,15,3,6,1,2))
+        line_graph.setDataPoints(listOf(5,15,3,6,1,2,5))
     }
 
 }

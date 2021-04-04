@@ -31,6 +31,9 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var widthPerItem : Float = 0F
     private var heightPerValue : Float = 0F
     private var paddingForButtons : Float = 0f
+    private var graduationPadding : Float = 100f
+    private var amountOfGraduations = 6
+    private var highestY = 0f
 
 
     //todo compatability with negative numbers
@@ -62,12 +65,18 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        widthPerItem = ((width - paddingLeft - paddingRight) / amountOfValues).toFloat()
-        heightPerValue = (((height - paddingTop - paddingBottom) / (highestValue - lowestValue)) * 0.9).toFloat() // 0.9 to make the height smaller
-        zeroY = (height - paddingBottom).toFloat()
-        initializePaint()
-        drawGraphPlotAndLines(canvas)
-        drawGraphFilling(canvas)
+        //draw different type of graph for smaller than 1 values, draw only line graph
+        if(lowestValue < 0){
+            //notify that graph does not support negative numbers
+        }else {
+            widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues)
+            heightPerValue = (((height - paddingTop - paddingBottom) / (highestValue - lowestValue)) * 0.9).toFloat() // 0.9 to make the height smaller
+            zeroY = (height - paddingBottom).toFloat()
+            initializePaint()
+            drawGraphPlotAndLines(canvas)
+            drawGraphFilling(canvas)
+            drawGraduations(canvas)
+        }
         /*
         xAxisTotal = (width / amountOfValues).toFloat()
         yAxisTotal = (height / (highestProportionalValue + (if(highestProportionalValue < 1) 1 else (highestProportionalValue / 10)))).toFloat()
@@ -84,21 +93,21 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
 
     private fun drawGraduations(canvas: Canvas?){
-        val x = xAxisTotal * (dataPoints.size + 1).toFloat() - 20f
+        val x = (widthPerItem * amountOfValues.toFloat()) + 15 + paddingRight
         var y : Float
         val textPaint = Paint()
         textPaint.color = Color.GRAY
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textSize = 40F
-        for(i in 0..6){
+        for(i in 0..amountOfGraduations){
+            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) * 0.9).toFloat()
             if(i != 0){
-                y =  zeroY - 80f - ((height / 9) * i)
-                canvas?.drawText(((highestValue / 6) * i).toString(), x, y, textPaint)
+                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toString(), x, y, textPaint)
             }else{
-                canvas?.drawText(0.toString(), x, zeroY - 80f, textPaint)
+                canvas?.drawText(lowestValue.toString(), x, y, textPaint)
             }
         }
-        canvas?.drawText(highestValue.toString(), x, zeroY - 80f - ((height / 9) * 7), textPaint)
+        canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7) , textPaint)
     }
 
     private fun drawButtons(canvas: Canvas?){
@@ -155,7 +164,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             mPath.lineTo(widthPerItem*iteration + paddingLeft, zeroY - (it.toFloat() * heightPerValue) - paddingForButtons)
             iteration ++
         }
-        mPath.lineTo(widthPerItem * amountOfValues - paddingRight, zeroY - heightPerValue - paddingForButtons)
+        mPath.lineTo((widthPerItem * amountOfValues + paddingLeft), zeroY - paddingForButtons)
         canvas?.drawPath(mPath, gradientPaint)
     }
 
@@ -183,6 +192,9 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         mPath.moveTo(0f + paddingLeft, originY)
 
         dataPoints.forEach{
+            if(it == highestValue){
+                highestY = originY - (it * heightPerValue)
+            }
             mPath.lineTo(originX , originY - (it * heightPerValue))
             canvas?.drawCircle(originX , originY - (it * heightPerValue), 10F, plotPaint)
             originX += widthPerItem
