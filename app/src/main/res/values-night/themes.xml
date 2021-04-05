@@ -17,7 +17,7 @@
 
     <style name="Widget.MaterialComponents.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@color/black</item>
-        <item name="itemIconTint">@color/light_grey</item>
-        <item name="itemTextColor">@color/light_grey</item>
+        <item name="itemIconTint">@color/dark_grey</item>
+        <item name="itemTextColor">@color/dark_grey</item>
     </style>
 </resources>
