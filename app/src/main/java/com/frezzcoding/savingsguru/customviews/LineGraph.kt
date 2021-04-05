@@ -4,9 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import androidx.constraintlayout.solver.widgets.Rectangle
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toRectF
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.common.highestNumber
 import com.frezzcoding.savingsguru.common.lowestNumber
@@ -32,7 +30,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var highestY = 0f
 
 
-    //todo compatability with negative numbers
+    //todo compatibility with negative numbers
+    //todo make changes so that wrap content doesn't occupy entire screen
     init {
         linePaint = Paint()
         mPath = Path()
@@ -41,9 +40,9 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         gradientPaint = Paint()
     }
 
-    fun setDataPoints(data : List<Int>) {
+    fun setDataPoints(data: List<Int>) {
         dataPoints = data
-        dataPoints.highestNumber()?.let {highestNumber ->
+        dataPoints.highestNumber()?.let { highestNumber ->
             highestValue = highestNumber
         }
         dataPoints.lowestNumber()?.let { lowestNumber ->
@@ -51,13 +50,13 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         }
         if(highestValue - lowestValue == 0){
             //handle divide by zero error
+            handleError()
         }
         amountOfValues = dataPoints.size
     }
 
+    private fun handleError(){
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -84,14 +83,14 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textSize = 40F
         for(i in 0..amountOfGraduations){
-            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) ).toFloat()
+            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) )
             if(i != 0){
                 canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toString(), x, y, textPaint)
             }else{
                 canvas?.drawText(lowestValue.toString(), x, y, textPaint)
             }
         }
-        canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7) , textPaint)
+        canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
     }
 
     /*
@@ -147,7 +146,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         mPath.moveTo(paddingLeft.toFloat() + 0f, zeroY - paddingForButtons)
         var iteration = 1
         dataPoints.forEach {
-            mPath.lineTo(widthPerItem*iteration + paddingLeft, zeroY - (it.toFloat() * heightPerValue) - paddingForButtons)
+            mPath.lineTo(widthPerItem * iteration + paddingLeft, zeroY - (it.toFloat() * heightPerValue) - paddingForButtons)
             iteration ++
         }
         mPath.lineTo((widthPerItem * amountOfValues + paddingLeft), zeroY - paddingForButtons)
@@ -184,8 +183,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             if(it == highestValue){
                 highestY = originY - (it * heightPerValue)
             }
-            mPath.lineTo(originX , originY - (it * heightPerValue))
-            canvas?.drawCircle(originX , originY - (it * heightPerValue), 10F, plotPaint)
+            mPath.lineTo(originX, originY - (it * heightPerValue))
+            canvas?.drawCircle(originX, originY - (it * heightPerValue), 10F, plotPaint)
             originX += widthPerItem
         }
         canvas?.drawPath(mPath, linePaint)
