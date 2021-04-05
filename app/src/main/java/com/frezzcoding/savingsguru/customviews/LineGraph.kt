@@ -18,15 +18,11 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var plotPaint : Paint
     private var gradientPaint : Paint
     private var mPath: Path
-    private var xAxisTotal = 0f
-    private var yAxisTotal = 0f
     private lateinit var dataPoints : List<Int> //make data object to hold date & value
-    private var highestProportionalValue : Int = 0
     private var highestValue : Int = 0
     private var lowestValue : Int = 0
     private var amountOfValues : Int = 0
     private var zeroY = 0F
-    private var setSize = 3
 
     private var widthPerItem : Float = 0F
     private var heightPerValue : Float = 0F
@@ -59,8 +55,9 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         amountOfValues = dataPoints.size
     }
 
-    fun setGraduations(){
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -77,19 +74,6 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             drawGraphFilling(canvas)
             drawGraduations(canvas)
         }
-        /*
-        xAxisTotal = (width / amountOfValues).toFloat()
-        yAxisTotal = (height / (highestProportionalValue + (if(highestProportionalValue < 1) 1 else (highestProportionalValue / 10)))).toFloat()
-        zeroY = (highestProportionalValue * (height / highestProportionalValue) + paddingTop).toFloat()
-        initializePaint()
-
-        drawGraphPlotAndLines(canvas)
-        drawGraphFilling(canvas)
-        drawAxis(canvas)
-        //drawButtons(canvas)
-        drawGraduations(canvas)
-
-         */
     }
 
     private fun drawGraduations(canvas: Canvas?){
@@ -100,7 +84,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textSize = 40F
         for(i in 0..amountOfGraduations){
-            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) * 0.9).toFloat()
+            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) ).toFloat()
             if(i != 0){
                 canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toString(), x, y, textPaint)
             }else{
@@ -110,6 +94,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7) , textPaint)
     }
 
+    /*
     private fun drawButtons(canvas: Canvas?){
         val textPaint = Paint()
         textPaint.color = Color.GRAY
@@ -135,6 +120,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
         }
     }
+     */
 
     private fun initializePaint(){
         mBlackPaint.color = Color.BLACK
@@ -148,7 +134,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         //prepare gradient
         val colors = intArrayOf(R.color.purple_500, R.color.green)
         val gradient = LinearGradient(
-                xAxisTotal, paddingTop.toFloat(), 0f, zeroY, colors, null, Shader.TileMode.CLAMP
+                widthPerItem, paddingTop.toFloat(), 0f, zeroY, colors, null, Shader.TileMode.CLAMP
         )
         gradientPaint.style = Paint.Style.FILL
         gradientPaint.shader = gradient
@@ -169,6 +155,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
 
 
+
+    /*
     private fun drawAxis(canvas: Canvas?) {
         val dottedPaint = Paint()
         dottedPaint.style = Paint.Style.STROKE
@@ -185,6 +173,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         //canvas?.drawLine(xAxisTotal, yAxisTotal, xAxisTotal, (height - 10).toFloat(), mBlackPaint)
         //canvas?.drawLine(10F, height - yAxisTotal, width - xAxisTotal, height - yAxisTotal, mBlackPaint)
     }
+     */
 
     private fun drawGraphPlotAndLines(canvas: Canvas?){
         var originX = widthPerItem + paddingLeft
