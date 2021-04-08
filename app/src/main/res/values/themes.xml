@@ -14,9 +14,37 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <style name="OutlinedBox.Colorful" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:colorPrimary">@color/green</item>
+    </style>
+
+
     <style name="Widget.MaterialComponents.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@color/white</item>
         <item name="itemIconTint">@color/dark_grey</item>
         <item name="itemTextColor">@color/dark_grey</item>
     </style>
+
+    <style name="H0" >
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">46sp</item>
+    </style>
+
+    <style name="H1" >
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="H2" >
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="H3" >
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
 </resources>

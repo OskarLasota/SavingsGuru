@@ -5,4 +5,11 @@
     <string name="money">Money</string>
     <string name="stats">Statistics</string>
     <string name="graphs">Graphs</string>
+
+    //new scenario fragment
+    <string name="scenario_title">Scenario Title</string>
+    <string name="select_monthly_expenses">Select Monthly Expenses</string>
+    <string name="specify_monthly_income">Specify Monthly Income</string>
+    <string name="savings_to_invest_ratio">Savings to Investment ratio</string>
+    <string name="next">Next</string>
 </resources>

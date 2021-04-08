@@ -14,17 +14,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="20dp"
-        android:text="Scenario Title"
+        style="@style/H3"
+        android:text="@string/scenario_title"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_title_input"
+        style="@style/OutlinedBox.Colorful"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="best case scenario?"
+        app:startIconDrawable="@drawable/ic_money"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:layout_margin="20dp"
         app:layout_constraintRight_toRightOf="parent"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -41,34 +44,105 @@
         android:text="Select Monthly Expenses"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_title_input"
-        android:layout_margin="20dp"
+        style="@style/H3"
         />
 
-    <NumberPicker
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_monthly_expenses"
+        style="@style/OutlinedBox.Colorful"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:id="@+id/picker_monthly_expenses"
+        android:layout_margin="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:startIconDrawable="@drawable/ic_money"
+        app:layout_constraintTop_toBottomOf="@id/tv_monthly_expenses"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_monthly_expenses"
-        />
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_monthly_income"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:text="Specify Monthly Income"
+        style="@style/H3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/picker_monthly_expenses" />
+        app:layout_constraintTop_toBottomOf="@id/til_monthly_expenses" />
 
-    <NumberPicker
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_income"
+        style="@style/OutlinedBox.Colorful"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:id="@+id/picker_monthly_income"
+        android:layout_margin="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:startIconDrawable="@drawable/ic_money"
+        app:layout_constraintTop_toBottomOf="@id/tv_monthly_income"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_monthly_income"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tv_savings_investment_ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_income"
+        style="@style/H3"
+        android:text="@string/savings_to_invest_ratio"
+        />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seekbar_ratio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_savings_investment_ratio"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="30dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_savings_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_ratio"
+        android:layout_marginLeft="30dp"
+        tools:text="0"
+        />
+
+    <TextView
+        android:id="@+id/tv_investment_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_ratio"
+        android:layout_marginRight="30dp"
+        tools:text="100"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_investment_value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/next"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
