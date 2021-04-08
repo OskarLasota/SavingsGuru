@@ -26,3 +26,4 @@
   
 + Retrofit2 & Gson - Also implementing the REST API
 
+//todo accessibility features
