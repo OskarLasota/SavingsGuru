@@ -25,9 +25,6 @@ class MainActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this,
             R.id.nav_host_fragment
         )
-        bottom_nav.setOnNavigationItemReselectedListener {
-            //do nothing to ignore reselection of same fragment
-        }
         setupBottomNavMenu(navController)
         setSupportActionBar(toolbar)
     }
