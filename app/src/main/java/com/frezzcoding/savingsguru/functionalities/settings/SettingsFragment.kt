@@ -30,6 +30,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        initializeSwitch()
     }
 
     private fun setListeners(){
@@ -40,6 +41,7 @@ class SettingsFragment : Fragment() {
             }else{
                 disableNotification()
             }
+            storeSelection(isChecked)
         }
     }
 
@@ -48,6 +50,14 @@ class SettingsFragment : Fragment() {
     }
 
     private fun disableNotification(){
+
+    }
+
+    private fun initializeSwitch(){
+
+    }
+
+    private fun storeSelection(isChecked : Boolean){
 
     }
 
