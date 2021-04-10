@@ -36,11 +36,13 @@
     <style name="H1" >
         <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textSize">36sp</item>
+        <item name="android:layout_margin">20dp</item>
     </style>
 
     <style name="H2" >
         <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textSize">26sp</item>
+        <item name="android:layout_margin">20dp</item>
     </style>
 
     <style name="H3" >

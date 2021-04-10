@@ -13,4 +13,5 @@
     <string name="savings_to_invest_ratio">Savings to Investment ratio</string>
     <string name="next">Next</string>
     <string name="create">Create</string>
+    <string name="notify_monthly">Monthly savings notification</string>
 </resources>
