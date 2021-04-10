@@ -46,8 +46,8 @@ class NewScenarioFragment : Fragment() {
     }
 
     private fun adjustRatioValues(progress : Int){
-        binding.tvInvestmentValue
-        binding.tvSavingsValue
+        binding.tvInvestmentValue.text = (100 - progress).toString()
+        binding.tvSavingsValue.text = progress.toString()
     }
 
 

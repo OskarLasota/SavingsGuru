@@ -3,7 +3,6 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment_newscenario_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,7 @@
             style="@style/OutlinedBox.Colorful"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/ic_money">
+            app:startIconDrawable="@drawable/ic_explore">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_title"
@@ -86,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="10dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,7 +99,7 @@
                 android:layout_marginLeft="30dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="0" />
+                android:text="0" />
 
             <TextView
                 android:id="@+id/tv_investment_value"
@@ -108,7 +108,7 @@
                 android:layout_marginRight="30dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="100" />
+                android:text="100" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
