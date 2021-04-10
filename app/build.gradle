@@ -9,6 +9,10 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId "com.frezzcoding.savingsguru"
@@ -72,5 +76,8 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_hilt"
     kapt "androidx.hilt:hilt-compiler:$hilt_hilt"
+
+    //data binding
+    kapt 'com.android.databinding:compiler:2.3.1'
 
 }

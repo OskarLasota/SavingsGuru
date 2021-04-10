@@ -1,130 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:id="@+id/fragment_newscenario_container"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+<layout>
 
-
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/H3"
-        android:text="@string/scenario_title"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_title_input"
-        style="@style/OutlinedBox.Colorful"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment_newscenario_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_money"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/tv_monthly_expenses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Monthly Expenses"
-        style="@style/H3"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_monthly_expenses"
-        style="@style/OutlinedBox.Colorful"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_money"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tv_monthly_income"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Specify Monthly Income"
-        style="@style/H3"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_income"
-        style="@style/OutlinedBox.Colorful"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_money"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <TextView
-        android:id="@+id/tv_savings_investment_ratio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/H3"
-        android:text="@string/savings_to_invest_ratio"
-        />
-
-    <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/seekbar_ratio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
         <TextView
-            android:id="@+id/tv_savings_value"
+            android:id="@+id/tv_title"
+            style="@style/H3"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scenario_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_title_input"
+            style="@style/OutlinedBox.Colorful"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_money">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_monthly_expenses"
+            style="@style/H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Monthly Expenses" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_monthly_expenses"
+            style="@style/OutlinedBox.Colorful"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_money">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_monthly_expenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_monthly_income"
+            style="@style/H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Specify Monthly Income" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_income"
+            style="@style/OutlinedBox.Colorful"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_money">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_monthly_income"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_savings_investment_ratio"
+            style="@style/H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/savings_to_invest_ratio" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekbar_ratio"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            tools:text="0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_marginTop="10dp" />
 
-        <TextView
-            android:id="@+id/tv_investment_value"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_savings_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0" />
+
+            <TextView
+                android:id="@+id/tv_investment_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="100" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="30dp"
-            tools:text="100"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/create" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
