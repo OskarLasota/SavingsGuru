@@ -14,4 +14,7 @@
     <string name="next">Next</string>
     <string name="create">Create</string>
     <string name="notify_monthly">Monthly savings notification</string>
+
+    //home fragment
+    <string name="select_financial_goal">Select Financial Goal</string>
 </resources>
