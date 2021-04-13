@@ -17,4 +17,10 @@
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
+
+    //graph fragment
+    <string name="initial_investment_amount">Initial Investment</string>
+    <string name="interest_rate">Interest rate</string>
+    <string name="select_interval">Select Interval</string>
+    <string name="regular_deposits">Regular Deposits</string>
 </resources>
