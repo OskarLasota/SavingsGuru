@@ -4,11 +4,11 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fragment_graph_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <com.frezzcoding.savingsguru.customviews.LineGraph
             android:layout_width="wrap_content"
             android:layout_height="250dp"
@@ -58,17 +58,17 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_interest_rate"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             style="@style/OutlinedBox.Colorful"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_interest_rate"
-            app:startIconDrawable="@drawable/ic_money">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:id="@+id/et_interest_rate"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
             android:textStyle="bold"
             android:id="@+id/tv_select_interest_interval"
             android:textColor="@color/blue"
-            app:layout_constraintLeft_toRightOf="@id/til_interest_rate"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/til_interest_rate"
             app:layout_constraintBottom_toBottomOf="@id/til_interest_rate"
@@ -119,9 +119,9 @@
             android:layout_height="wrap_content"
             style="@style/H3"
             android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.8"
             android:textColor="@color/blue"
             android:id="@+id/tv_select_deposits_interval"
-            app:layout_constraintLeft_toRightOf="@id/til_regular_deposits"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/til_regular_deposits"
             app:layout_constraintBottom_toBottomOf="@id/til_regular_deposits"
