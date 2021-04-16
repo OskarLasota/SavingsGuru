@@ -17,13 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewScenarioFragment : Fragment() {
 
-    private lateinit var binding : FragmentNewscenarioBinding
+    private lateinit var binding: FragmentNewscenarioBinding
     private val viewModel by viewModels<NewScenarioViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_newscenario , container, false
+            inflater,
+            R.layout.fragment_newscenario, container, false
         )
         return binding.root
     }
@@ -35,7 +39,7 @@ class NewScenarioFragment : Fragment() {
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.seekbarRatio.setOnSeekBarChangeListener(object : SeekBarOnProgressChanged {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 adjustRatioValues(progress)
@@ -43,22 +47,33 @@ class NewScenarioFragment : Fragment() {
         })
 
         binding.btnCreate.setOnClickListener {
-            addEntry()
-            viewModel.addScenario(Scenario(1))
+            if (entryIsValid()) {
+                addEntry()
+            }
         }
-
     }
 
-    private fun adjustRatioValues(progress : Int){
+    private fun entryIsValid(): Boolean {
+        return true
+    }
+
+    private fun adjustRatioValues(progress: Int) {
         binding.tvInvestmentValue.text = (100 - progress).toString()
         binding.tvSavingsValue.text = progress.toString()
     }
 
 
-    private fun addEntry(){
-        binding.etTitle.text
-        binding.etMonthlyExpenses.text
-        binding.etMonthlyIncome.text
+    private fun addEntry() {
+        viewModel.addScenario(
+            Scenario(
+                0,
+                binding.etTitle.text.toString(),
+                binding.etMonthlyExpenses.text.toString().toInt(),
+                binding.etMonthlyIncome.toString().toInt(),
+                binding.seekbarRatio.progress,
+                100 - binding.seekbarRatio.progress
+            )
+        )
     }
 
 }

@@ -10,7 +10,6 @@ import javax.inject.Inject
 class NewScenarioViewModel @Inject constructor(var repo : NewScenarioRepo) : ViewModel() {
 
     fun addScenario(scenario : Scenario){
-        println("reached vm")
         repo.addScenario(scenario)
     }
 
