@@ -24,7 +24,7 @@ class NewScenarioFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_newscenario, container, false
@@ -69,7 +69,7 @@ class NewScenarioFragment : Fragment() {
                 0,
                 binding.etTitle.text.toString(),
                 binding.etMonthlyExpenses.text.toString().toInt(),
-                binding.etMonthlyIncome.toString().toInt(),
+                binding.etMonthlyIncome.text.toString().toInt(),
                 binding.seekbarRatio.progress,
                 100 - binding.seekbarRatio.progress
             )

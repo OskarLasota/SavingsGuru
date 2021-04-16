@@ -3,6 +3,7 @@ package com.frezzcoding.savingsguru.common.di
 import android.content.Context
 import androidx.room.Room
 import com.frezzcoding.savingsguru.data.database.AppDatabase
+import com.frezzcoding.savingsguru.data.database.ScenarioDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,11 @@ object AppModule {
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context) : AppDatabase{
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "database").build()
+    }
+
+    @Provides
+    fun provideScenarioDao(database: AppDatabase) : ScenarioDao{
+        return database.scenarioDao()
     }
 
 }
