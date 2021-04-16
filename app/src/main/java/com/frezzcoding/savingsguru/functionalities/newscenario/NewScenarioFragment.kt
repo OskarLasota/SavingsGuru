@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.common.SeekBarOnProgressChanged
+import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.databinding.FragmentNewscenarioBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NewScenarioFragment : Fragment() {
 
     private lateinit var binding : FragmentNewscenarioBinding
+    private val viewModel by viewModels<NewScenarioViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(
@@ -41,6 +44,7 @@ class NewScenarioFragment : Fragment() {
 
         binding.btnCreate.setOnClickListener {
             addEntry()
+            viewModel.addScenario(Scenario(1))
         }
 
     }
