@@ -12,8 +12,10 @@ class HomeRepoImpl @Inject constructor(val dao: ScenarioDao) : HomeRepo {
         }
     }
 
-    override fun getScenario(): Single<Scenario> {
-        TODO("Not yet implemented")
+    override fun getScenario(id : Int): Single<Scenario> {
+        return Single.defer{
+            return@defer dao.getScenario(id)
+        }
     }
 
 

@@ -25,4 +25,17 @@ class HomeViewModel @Inject constructor(val repo : HomeRepo) : ViewModel() {
                 })
         )
     }
+
+    fun getScenario(id : Int){
+        compositeDisposable.add(
+            repo.getScenario(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+
+                },{
+
+                })
+        )
+    }
 }

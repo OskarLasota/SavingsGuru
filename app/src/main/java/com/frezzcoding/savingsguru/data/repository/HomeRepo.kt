@@ -7,6 +7,6 @@ interface HomeRepo {
 
     fun getScenarios() : Single<List<Scenario>>
 
-    fun getScenario() : Single<Scenario>
+    fun getScenario(id : Int) : Single<Scenario>
 
 }
