@@ -1,5 +1,7 @@
 package com.frezzcoding.savingsguru.common.di
 
+import com.frezzcoding.savingsguru.data.repository.HomeRepo
+import com.frezzcoding.savingsguru.data.repository.HomeRepoImpl
 import com.frezzcoding.savingsguru.data.repository.NewScenarioRepo
 import com.frezzcoding.savingsguru.data.repository.NewScenarioRepoImpl
 import dagger.Binds
@@ -14,5 +16,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindNewScenarioRepo(repo : NewScenarioRepoImpl) : NewScenarioRepo
+
+    @Binds
+    abstract fun bindHomeRepo(repo : HomeRepoImpl) : HomeRepo
 
 }
