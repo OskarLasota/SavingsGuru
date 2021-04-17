@@ -1,5 +1,7 @@
 package com.frezzcoding.savingsguru.functionalities.newscenario
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.data.repository.NewScenarioRepo
@@ -14,15 +16,22 @@ class NewScenarioViewModel @Inject constructor(var repo : NewScenarioRepo) : Vie
 
     private val compositeDisposable = CompositeDisposable()
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading : LiveData<Boolean> = _loading
+
+    private val _error = MutableLiveData<String>()
+    val error : LiveData<String> = _error
+
     fun addScenario(scenario : Scenario){
         compositeDisposable.add(
             repo.addScenario(scenario)
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe { _loading.value = true }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    println("success")
+                    _loading.value = false
                 },{
-                    println("handle error")
+                    _error.value = it.toString()
                 })
         )
     }

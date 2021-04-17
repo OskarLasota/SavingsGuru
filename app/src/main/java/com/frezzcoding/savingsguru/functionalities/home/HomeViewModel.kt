@@ -29,8 +29,10 @@ class HomeViewModel @Inject constructor(val repo: HomeRepo) : ViewModel() {
             repo.getScenarios()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { _loading.value = true }
                 .subscribe({ list ->
                     _scenarios.value = list
+                    _loading.value = false
                 }, {
                     _error.value = it.toString()
                 })
@@ -41,9 +43,10 @@ class HomeViewModel @Inject constructor(val repo: HomeRepo) : ViewModel() {
         compositeDisposable.add(
             repo.getScenario(id)
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe { _loading.value = true }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ list ->
-
+                .subscribe({ scenario ->
+                    _loading.value = false
                 }, {
                     _error.value = it.toString()
                 })

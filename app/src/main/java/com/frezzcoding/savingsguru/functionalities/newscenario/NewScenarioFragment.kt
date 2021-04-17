@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,8 +36,19 @@ class NewScenarioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //should hide bottom nav bar but show back button
-
+        setObservers()
         setListeners()
+    }
+
+    private fun setObservers(){
+        viewModel.error.observe(viewLifecycleOwner, {
+            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+        })
+        viewModel.loading.observe(viewLifecycleOwner, {
+            if(it){
+                // navigate back
+            }
+        })
     }
 
     private fun setListeners() {
