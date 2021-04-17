@@ -44,8 +44,7 @@ class HomeFragment : Fragment() {
 
         })
         viewModel.scenarios.observe(viewLifecycleOwner, { scenarioList ->
-            //setupAdapter()
-            //scenarioAdapter.submitList()
+            scenarioAdapter.submitList(scenarioList)
         })
     }
 
@@ -54,7 +53,7 @@ class HomeFragment : Fragment() {
             //set listener
         }
         binding.recyclerScenario.apply {
-            GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = scenarioAdapter
         }
     }

@@ -29,8 +29,8 @@ class ScenarioAdapter : ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUt
     }
 
     override fun onBindViewHolder(holder: ScenarioViewHolder, position: Int) {
-        getItem(position)?.let {
-
+        getItem(position)?.let { scenario ->
+            holder.bindTo(scenario)
         }
     }
 
