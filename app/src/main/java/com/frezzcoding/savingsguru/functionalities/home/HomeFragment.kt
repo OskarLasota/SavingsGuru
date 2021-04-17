@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAdapter()
-
+        viewModel.getScenarios()
         //scenarioAdapter.submitList()
     }
 
