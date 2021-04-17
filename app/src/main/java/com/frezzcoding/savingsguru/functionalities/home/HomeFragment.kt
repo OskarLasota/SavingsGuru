@@ -31,10 +31,22 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setObservers()
         setupAdapter()
         viewModel.getScenarios()
-        //scenarioAdapter.submitList()
+    }
+
+    private fun setObservers(){
+        viewModel.loading.observe(viewLifecycleOwner, { loading ->
+
+        })
+        viewModel.error.observe(viewLifecycleOwner, { errorMessage ->
+
+        })
+        viewModel.scenarios.observe(viewLifecycleOwner, { scenarioList ->
+            //setupAdapter()
+            //scenarioAdapter.submitList()
+        })
     }
 
     private fun setupAdapter(){
