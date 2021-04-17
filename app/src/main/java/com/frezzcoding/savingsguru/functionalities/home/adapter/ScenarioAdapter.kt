@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.Scenario
 
-class ScenarioAdapter : ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUtil()) {
+class ScenarioAdapter(val listener : ScenarioClickListener) : ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUtil()) {
 
 
     class ScenarioDiffUtil : DiffUtil.ItemCallback<Scenario>() {
@@ -31,7 +31,14 @@ class ScenarioAdapter : ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUt
     override fun onBindViewHolder(holder: ScenarioViewHolder, position: Int) {
         getItem(position)?.let { scenario ->
             holder.bindTo(scenario)
+            holder.itemView.setOnClickListener {
+                listener.onScenarioClick(scenario.id)
+            }
         }
+    }
+
+    interface ScenarioClickListener{
+        fun onScenarioClick(id : Int)
     }
 
 }

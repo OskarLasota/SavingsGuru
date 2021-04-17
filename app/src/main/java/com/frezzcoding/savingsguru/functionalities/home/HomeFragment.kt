@@ -14,7 +14,7 @@ import com.frezzcoding.savingsguru.functionalities.home.adapter.ScenarioAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var scenarioAdapter : ScenarioAdapter
@@ -49,13 +49,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAdapter(){
-        scenarioAdapter = ScenarioAdapter().apply {
-            //set listener
-        }
+        scenarioAdapter = ScenarioAdapter(this)
         binding.recyclerScenario.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = scenarioAdapter
         }
+    }
+
+    override fun onScenarioClick(id: Int) {
+        println("scenario $id clicked")
     }
 
 }
