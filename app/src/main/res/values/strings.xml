@@ -17,6 +17,7 @@
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
+    <string name="add_scenario">Add new Scenario</string>
 
     //graph fragment
     <string name="initial_investment_amount">Initial Investment</string>

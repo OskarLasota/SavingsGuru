@@ -31,6 +31,7 @@ class HomeViewModel @Inject constructor(val repo: HomeRepo) : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { _loading.value = true }
                 .subscribe({ list ->
+                    (list as ArrayList).add(Scenario(0, "", 0, 0,0,0)) //add an empty scenario just for display
                     _scenarios.value = list
                     _loading.value = false
                 }, {

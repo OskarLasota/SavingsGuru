@@ -58,6 +58,11 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
     }
 
     override fun onScenarioClick(id: Int) {
+        if(id == 0){
+
+        }else{
+
+        }
         println("scenario $id clicked")
     }
 
