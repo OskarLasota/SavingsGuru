@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.frezzcoding.savingsguru.functionalities.home.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_scenarioFragment"
+            app:destination="@id/scenarioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.frezzcoding.savingsguru.functionalities.newscenario.NewScenarioFragment"
@@ -30,4 +34,12 @@
         android:name="com.frezzcoding.savingsguru.functionalities.statistics.StatisticsFragment"
         tools:layout="@layout/fragment_statistics"
         android:label="StatisticsFragment" />
+    <fragment
+        android:id="@+id/scenarioFragment"
+        android:name="com.frezzcoding.savingsguru.functionalities.scenarioview.ScenarioFragment"
+        android:label="ScenarioFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
