@@ -3,6 +3,7 @@ package com.frezzcoding.savingsguru.common.di
 import androidx.lifecycle.ViewModel
 import com.frezzcoding.savingsguru.functionalities.home.HomeViewModel
 import com.frezzcoding.savingsguru.functionalities.newscenario.NewScenarioViewModel
+import com.frezzcoding.savingsguru.functionalities.scenarioview.ScenarioViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,10 +18,16 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(NewScenarioViewModel::class)
-    abstract fun bindNewScenarioViewModel(viewModel : NewScenarioViewModel) : ViewModel
+    abstract fun bindNewScenarioViewModel(viewModel: NewScenarioViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    abstract fun bindHomeViewModel(vm : HomeViewModel) : ViewModel
+    abstract fun bindHomeViewModel(vm: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ScenarioViewModel::class)
+    abstract fun bindScenarioViewModel(vm: ScenarioViewModel): ViewModel
+
 }
