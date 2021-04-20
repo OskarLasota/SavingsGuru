@@ -1,4 +1,4 @@
-package com.frezzcoding.savingsguru.functionalities.home
+package com.frezzcoding.savingsguru.functionalities.scenarioview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,10 +12,10 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(val repo: ScenarioRepo, val compositeDisposable: CompositeDisposable) : ViewModel() {
+class ScenarioViewModel @Inject constructor(val compositeDisposable : CompositeDisposable, val repo : ScenarioRepo): ViewModel() {
 
-    private val _scenarios = MutableLiveData<List<Scenario>>()
-    val scenarios: LiveData<List<Scenario>> = _scenarios
+    private val _scenario = MutableLiveData<List<Scenario>>()
+    val scenario: LiveData<List<Scenario>> = _scenario
 
     private val _loading = MutableLiveData<Boolean>()
     val loading : LiveData<Boolean> = _loading
@@ -23,19 +23,18 @@ class HomeViewModel @Inject constructor(val repo: ScenarioRepo, val compositeDis
     private val _error = MutableLiveData<String>()
     val error : LiveData<String> = _error
 
-    fun getScenarios() {
+    fun getScenario(id: Int) {
         compositeDisposable.add(
-            repo.getScenarios()
+            repo.getScenario(id)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { _loading.value = true }
-                .subscribe({ list ->
-                    (list as ArrayList).add(Scenario(0, "", 0, 0,0,0)) //add an empty scenario just for display
-                    _scenarios.value = list
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ scenario ->
                     _loading.value = false
                 }, {
                     _error.value = it.toString()
                 })
         )
     }
+
 }
