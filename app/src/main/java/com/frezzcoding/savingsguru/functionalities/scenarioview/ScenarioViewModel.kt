@@ -12,16 +12,19 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class ScenarioViewModel @Inject constructor(val compositeDisposable : CompositeDisposable, val repo : ScenarioRepo): ViewModel() {
+class ScenarioViewModel @Inject constructor(
+    private val compositeDisposable: CompositeDisposable,
+    private val repo: ScenarioRepo
+) : ViewModel() {
 
-    private val _scenario = MutableLiveData<List<Scenario>>()
-    val scenario: LiveData<List<Scenario>> = _scenario
+    private val _scenario = MutableLiveData<Scenario>()
+    val scenario: LiveData<Scenario> = _scenario
 
     private val _loading = MutableLiveData<Boolean>()
-    val loading : LiveData<Boolean> = _loading
+    val loading: LiveData<Boolean> = _loading
 
     private val _error = MutableLiveData<String>()
-    val error : LiveData<String> = _error
+    val error: LiveData<String> = _error
 
     fun getScenario(id: Int) {
         compositeDisposable.add(
@@ -30,6 +33,7 @@ class ScenarioViewModel @Inject constructor(val compositeDisposable : CompositeD
                 .doOnSubscribe { _loading.value = true }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ scenario ->
+                    _scenario.value = scenario
                     _loading.value = false
                 }, {
                     _error.value = it.toString()
