@@ -7,12 +7,16 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navController : NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,11 +26,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews(){
-        val navController = Navigation.findNavController(this,
+        navController = Navigation.findNavController(this,
             R.id.nav_host_fragment
         )
         setupBottomNavMenu(navController)
         setSupportActionBar(toolbar)
+        setupActionBar(navController)
+    }
+
+    private fun setupActionBar(navController: NavController){
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.homeFragment,
+            R.id.settingsFragment,
+            R.id.addFragment,
+            R.id.graphsFragment,
+            R.id.statsFragment
+        ).build()
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
