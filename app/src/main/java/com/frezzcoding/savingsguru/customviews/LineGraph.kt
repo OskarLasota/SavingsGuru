@@ -16,7 +16,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var plotPaint : Paint
     private var gradientPaint : Paint
     private var mPath: Path
-    private lateinit var dataPoints : List<Int> //make data object to hold date & value
+    private var dataPoints = listOf<Int>() //make data object to hold date & value
     private var highestValue : Int = 0
     private var lowestValue : Int = 0
     private var amountOfValues : Int = 0
@@ -53,6 +53,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             handleError()
         }
         amountOfValues = dataPoints.size
+        invalidate()
     }
 
     private fun handleError(){
@@ -64,9 +65,12 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         //draw different type of graph for smaller than 1 values, draw only line graph
         if(lowestValue < 0){
             //notify that graph does not support negative numbers
+        }else if (dataPoints.size < 2) {
+            //handle empty graph
         }else {
             widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues)
-            heightPerValue = (((height - paddingTop - paddingBottom) / (highestValue - lowestValue)) * 0.9).toFloat() // 0.9 to make the height smaller
+            var highestLowestDifference = highestValue - lowestValue
+            heightPerValue = (((height - paddingTop - paddingBottom).toDouble() / if(highestLowestDifference == 0)  1 else highestLowestDifference) * 1).toFloat()
             zeroY = (height - paddingBottom).toFloat()
             initializePaint()
             drawGraphPlotAndLines(canvas)

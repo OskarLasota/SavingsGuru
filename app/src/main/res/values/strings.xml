@@ -24,4 +24,5 @@
     <string name="interest_rate">Interest rate</string>
     <string name="select_interval">Select Interval</string>
     <string name="regular_deposits">Regular Deposits</string>
+    <string name="calculate">Calculate</string>
 </resources>
