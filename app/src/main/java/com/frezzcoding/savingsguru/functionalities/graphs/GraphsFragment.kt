@@ -16,9 +16,8 @@ import kotlinx.android.synthetic.main.fragment_graph.*
 class GraphsFragment : Fragment() {
 
     private lateinit var binding : FragmentGraphBinding
-    private var initial = 1
+    private var initial = 0
     private var deposits = 0
-    private var interest = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,13 +34,7 @@ class GraphsFragment : Fragment() {
     }
 
     private fun setListeners(){
-        binding.tvSelectDepositsInterval.setOnClickListener {
-            //show popup
-        }
-        binding.tvSelectInterestInterval.setOnClickListener {
-            //show popup
-        }
-        binding.etInitialInvestment.doOnTextChanged { text, _, _, _ ->
+        binding.etInitialSavings.doOnTextChanged { text, _, _, _ ->
             if(!text.isNullOrEmpty()) {
                 initial = text.toString().toInt()
             }
@@ -51,11 +44,6 @@ class GraphsFragment : Fragment() {
                 deposits = text.toString().toInt()
             }
         }
-        binding.etInterestRate.doOnTextChanged { text, _, _, _ ->
-            if(!text.isNullOrEmpty()) {
-                interest = text.toString().toInt()
-            }
-        }
         binding.btnCalcualte.setOnClickListener {
             updateGraph()
         }
@@ -63,9 +51,6 @@ class GraphsFragment : Fragment() {
 
     private fun updateGraph(){
         var amount = initial
-        //1000
-        //2
-        //200
         var dataPoints = arrayListOf<Int>()
         for(i in 1..25) {
             dataPoints.add(amount)

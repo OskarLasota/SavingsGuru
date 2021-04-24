@@ -20,9 +20,10 @@
     <string name="add_scenario">Add new Scenario</string>
 
     //graph fragment
-    <string name="initial_investment_amount">Initial Investment</string>
+    <string name="initial_savings_amount">Initial Savings</string>
     <string name="interest_rate">Interest rate</string>
     <string name="select_interval">Select Interval</string>
     <string name="regular_deposits">Regular Deposits</string>
     <string name="calculate">Calculate</string>
+    <string name="question_years">How many years?</string>
 </resources>
