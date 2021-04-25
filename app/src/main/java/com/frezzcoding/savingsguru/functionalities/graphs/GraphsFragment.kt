@@ -31,6 +31,8 @@ class GraphsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+
+        //todo idea to allow user to add entries that represent years or months so that they can estimate their future savings
     }
 
     private fun setListeners(){
