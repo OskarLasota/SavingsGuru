@@ -70,7 +70,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         }else {
             widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues)
             var highestLowestDifference = highestValue - lowestValue
-            heightPerValue = (((height - paddingTop - paddingBottom).toDouble() / if(highestLowestDifference == 0)  1 else highestLowestDifference) * 1).toFloat()
+            heightPerValue = (((height - paddingTop - paddingBottom).toDouble() / if(highestLowestDifference == 0)  1 else highestLowestDifference) * 0.9).toFloat()
             zeroY = (height - paddingBottom).toFloat()
             initializePaint()
             drawGraphPlotAndLines(canvas)

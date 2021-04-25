@@ -34,41 +34,12 @@ class GraphsFragment : Fragment() {
     }
 
     private fun setListeners(){
-        binding.etInitialSavings.doOnTextChanged { text, _, _, _ ->
-            if(!text.isNullOrEmpty()) {
-                initial = text.toString().toInt()
-            }
-        }
-        binding.etRegularDeposits.doOnTextChanged { text, _, _, _ ->
-            if(!text.isNullOrEmpty()) {
-                deposits = text.toString().toInt()
-            }
-        }
-        binding.btnCalcualte.setOnClickListener {
-            updateGraph()
-        }
+
     }
 
     private fun updateGraph(){
-        var amount = initial
-        var dataPoints = arrayListOf<Int>()
-        for(i in 1..25) {
-            dataPoints.add(amount)
-            for (i in 1..12) {
-                if(interest <= 0){
-                    amount += deposits
-                } else if(amount <= 0) {
-                    if(deposits <= 0){
-                        //needs deposit if initial is 0
-                    } else {
-                        amount += deposits
-                        amount += (amount * (interest / 100))
-                    }
-                }else {
-                    amount += (amount * (interest / 100)) + deposits
-                }
-            }
-        }
+        var dataPoints = listOf(2,41,23,34,19,24,11,6)
+
         line_graph.setDataPoints(dataPoints)
 
     }
