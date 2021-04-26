@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
+import com.frezzcoding.savingsguru.functionalities.graphs.adapter.GraphsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_graph.*
 
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_graph.*
 class GraphsFragment : Fragment() {
 
     private lateinit var binding : FragmentGraphBinding
+    private lateinit var graphsAdapter : GraphsAdapter
     private var initial = 0
     private var deposits = 0
 
