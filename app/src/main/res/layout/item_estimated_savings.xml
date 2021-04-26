@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="estimatedSavings"
+            type="com.frezzcoding.savingsguru.data.models.EstimatedSavings" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
+            style="@style/H1"
+            android:text="-"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_savings_amount"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tv_label"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/OutlinedBox.Colorful"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_savings_amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/til_savings_amount"
+            app:layout_constraintLeft_toLeftOf="@id/til_savings_amount"
+            style="@style/H3"
+            android:textColor="@color/blue"
+            android:text="@string/add_another"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

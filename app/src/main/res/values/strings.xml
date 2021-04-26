@@ -21,9 +21,5 @@
 
     //graph fragment
     <string name="initial_savings_amount">Initial Savings</string>
-    <string name="interest_rate">Interest rate</string>
-    <string name="select_interval">Select Interval</string>
-    <string name="regular_deposits">Regular Deposits</string>
-    <string name="calculate">Calculate</string>
-    <string name="question_years">How many years?</string>
+    <string name="add_another">Add another</string>
 </resources>
