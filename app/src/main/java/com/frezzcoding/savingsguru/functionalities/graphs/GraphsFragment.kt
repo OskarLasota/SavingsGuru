@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.frezzcoding.savingsguru.R
+import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
 import com.frezzcoding.savingsguru.functionalities.graphs.adapter.GraphsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,8 +35,17 @@ class GraphsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-
+        setupAdapter()
         //todo idea to allow user to add entries that represent years or months so that they can estimate their future savings
+    }
+
+    private fun setupAdapter(){
+        graphsAdapter = GraphsAdapter()
+        binding.recyclerSavings.apply {
+            layoutManager = GridLayoutManager(requireContext(), 1)
+            adapter = graphsAdapter
+        }
+        graphsAdapter.submitList(listOf(EstimatedSavings(1, 1, 1)))
     }
 
     private fun setListeners(){
