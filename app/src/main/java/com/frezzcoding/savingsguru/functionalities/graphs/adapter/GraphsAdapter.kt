@@ -3,8 +3,8 @@ package com.frezzcoding.savingsguru.functionalities.graphs.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 

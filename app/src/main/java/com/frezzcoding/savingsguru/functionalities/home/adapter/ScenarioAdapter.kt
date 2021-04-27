@@ -1,12 +1,10 @@
 package com.frezzcoding.savingsguru.functionalities.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.databinding.ItemScenarioBinding
