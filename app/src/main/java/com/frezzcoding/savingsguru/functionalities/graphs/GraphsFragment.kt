@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_graph.*
 
 @AndroidEntryPoint
-class GraphsFragment : Fragment() {
+class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings{
 
     private lateinit var binding : FragmentGraphBinding
     private lateinit var graphsAdapter : GraphsAdapter
@@ -37,7 +37,7 @@ class GraphsFragment : Fragment() {
     }
 
     private fun setupAdapter(){
-        graphsAdapter = GraphsAdapter()
+        graphsAdapter = GraphsAdapter(this)
         binding.recyclerSavings.apply {
             layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = graphsAdapter
@@ -53,6 +53,10 @@ class GraphsFragment : Fragment() {
         var dataPoints = listOf(2,41,23,34,19,24,11,6)
 
         line_graph.setDataPoints(dataPoints)
+
+    }
+
+    override fun addAnotherClick(id : Int) {
 
     }
 
