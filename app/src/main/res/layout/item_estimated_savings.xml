@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
         <variable
             name="estimatedSavings"
             type="com.frezzcoding.savingsguru.data.models.EstimatedSavings" />
@@ -11,23 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
-            style="@style/H1"
-            android:text="-"
-            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_savings_amount"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/tv_label"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_money"
             style="@style/OutlinedBox.Colorful"
             >
 
@@ -44,7 +36,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/til_savings_amount"
             app:layout_constraintLeft_toLeftOf="@id/til_savings_amount"
-            style="@style/H3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/H4"
+            android:visibility="@{estimatedSavings.lastEntry ? View.VISIBLE : View.GONE, default=visible}"
             android:textColor="@color/blue"
             android:text="@string/add_another"
             />

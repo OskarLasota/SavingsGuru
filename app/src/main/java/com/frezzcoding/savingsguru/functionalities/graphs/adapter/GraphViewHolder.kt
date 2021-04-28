@@ -7,7 +7,7 @@ import com.frezzcoding.savingsguru.databinding.ItemEstimatedSavingsBinding
 class GraphViewHolder(val binding : ItemEstimatedSavingsBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindTo(estimatedSavings: EstimatedSavings){
-
+        binding.estimatedSavings = estimatedSavings
     }
 
 }

@@ -19,14 +19,12 @@ class GraphsFragment : Fragment() {
 
     private lateinit var binding : FragmentGraphBinding
     private lateinit var graphsAdapter : GraphsAdapter
-    private var initial = 0
-    private var deposits = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_graph, container, false)
         return binding.root
     }
@@ -44,7 +42,7 @@ class GraphsFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = graphsAdapter
         }
-        graphsAdapter.submitList(listOf(EstimatedSavings(1, 1, 1)))
+        graphsAdapter.submitList(listOf(EstimatedSavings(1, 1, 1, lastEntry = false), EstimatedSavings(2,2,2,true)))
     }
 
     private fun setListeners(){
