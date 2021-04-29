@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 
-class GraphsAdapter(val listener : OnClickListenerSavings) : ListAdapter<EstimatedSavings, GraphViewHolder>(GraphsDiffUtil()) {
+class GraphsAdapter(private val listener : OnClickListenerSavings) : ListAdapter<EstimatedSavings, GraphViewHolder>(GraphsDiffUtil()) {
 
     class GraphsDiffUtil : DiffUtil.ItemCallback<EstimatedSavings>() {
         override fun areItemsTheSame(oldItem: EstimatedSavings, newItem: EstimatedSavings): Boolean {
@@ -31,12 +31,12 @@ class GraphsAdapter(val listener : OnClickListenerSavings) : ListAdapter<Estimat
             holder.bindTo(it)
         }
         holder.binding.tvAddAnother.setOnClickListener {
-            listener.addAnotherClick(getItem(position).id)
+            listener.addAnotherClick(getItem(position).id, position)
         }
     }
 
     interface OnClickListenerSavings{
-        fun addAnotherClick(id : Int)
+        fun addAnotherClick(id : Int, position : Int)
     }
 
 

@@ -20,6 +20,8 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings{
     private lateinit var binding : FragmentGraphBinding
     private lateinit var graphsAdapter : GraphsAdapter
 
+    private var list = arrayListOf(EstimatedSavings(1, 1, 1, lastEntry = false), EstimatedSavings(2,2,2,true))
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,9 +33,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setListeners()
         setupAdapter()
-        //todo idea to allow user to add entries that represent years or months so that they can estimate their future savings
     }
 
     private fun setupAdapter(){
@@ -42,22 +42,19 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings{
             layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = graphsAdapter
         }
-        graphsAdapter.submitList(listOf(EstimatedSavings(1, 1, 1, lastEntry = false), EstimatedSavings(2,2,2,true)))
+        graphsAdapter.submitList(list)
     }
 
-    private fun setListeners(){
 
-    }
-
-    private fun updateGraph(){
-        var dataPoints = listOf(2,41,23,34,19,24,11,6)
-
-        line_graph.setDataPoints(dataPoints)
-
-    }
-
-    override fun addAnotherClick(id : Int) {
-
+    override fun addAnotherClick(id : Int, position : Int) {
+        list.forEach{
+            if(it.id == id){
+                it.lastEntry = false
+                graphsAdapter.notifyItemChanged(position)
+                return@forEach
+            }
+        }
+        list.add(EstimatedSavings(4,0,0,true))
     }
 
 }

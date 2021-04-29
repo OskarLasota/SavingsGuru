@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fragment_graph_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <com.frezzcoding.savingsguru.customviews.LineGraph
             android:layout_width="wrap_content"
             android:layout_height="250dp"
@@ -17,7 +17,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/recycler_savings"
             app:layout_constraintTop_toBottomOf="@id/line_graph"
             app:layout_constraintBottom_toBottomOf="parent"

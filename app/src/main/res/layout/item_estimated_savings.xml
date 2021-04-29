@@ -39,7 +39,7 @@
             app:layout_constraintLeft_toLeftOf="@id/til_savings_amount"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/H4"
-            android:visibility="@{estimatedSavings.lastEntry ? View.VISIBLE : View.GONE, default=visible}"
+            android:visibility="@{estimatedSavings.lastEntry ? View.VISIBLE : View.GONE}"
             android:textColor="@color/blue"
             android:text="@string/add_another"
             />
