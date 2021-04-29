@@ -1,3 +1,13 @@
 package com.frezzcoding.savingsguru.data.models
 
-data class EstimatedSavings(val id : Int, var amount : Int, var year : Int, var lastEntry : Boolean)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "table_savings")
+data class EstimatedSavings(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    var amount: Int,
+    var year: Int,
+    var lastEntry: Boolean
+)
