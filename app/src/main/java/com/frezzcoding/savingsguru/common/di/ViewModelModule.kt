@@ -1,6 +1,7 @@
 package com.frezzcoding.savingsguru.common.di
 
 import androidx.lifecycle.ViewModel
+import com.frezzcoding.savingsguru.functionalities.graphs.GraphsViewModel
 import com.frezzcoding.savingsguru.functionalities.home.HomeViewModel
 import com.frezzcoding.savingsguru.functionalities.newscenario.NewScenarioViewModel
 import com.frezzcoding.savingsguru.functionalities.scenarioview.ScenarioViewModel
@@ -29,5 +30,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ScenarioViewModel::class)
     abstract fun bindScenarioViewModel(vm: ScenarioViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GraphsViewModel::class)
+    abstract fun bindGraphsViewModel(vm: GraphsViewModel): ViewModel
 
 }
