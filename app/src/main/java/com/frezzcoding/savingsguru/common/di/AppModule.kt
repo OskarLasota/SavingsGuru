@@ -3,6 +3,7 @@ package com.frezzcoding.savingsguru.common.di
 import android.content.Context
 import androidx.room.Room
 import com.frezzcoding.savingsguru.data.database.AppDatabase
+import com.frezzcoding.savingsguru.data.database.SavingsDao
 import com.frezzcoding.savingsguru.data.database.ScenarioDao
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,11 @@ object AppModule {
     @Provides
     fun provideScenarioDao(database: AppDatabase) : ScenarioDao{
         return database.scenarioDao()
+    }
+
+    @Provides
+    fun provideSavingsDao(database: AppDatabase) : SavingsDao{
+        return database.savingsDao()
     }
 
     @Provides

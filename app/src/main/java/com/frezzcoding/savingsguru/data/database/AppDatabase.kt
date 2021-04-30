@@ -12,6 +12,7 @@ import com.frezzcoding.savingsguru.data.models.Scenario
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun scenarioDao() : ScenarioDao
+    abstract fun savingsDao() : SavingsDao
 
     companion object {
         @Volatile

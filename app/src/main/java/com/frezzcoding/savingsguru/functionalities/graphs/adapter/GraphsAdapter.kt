@@ -1,7 +1,9 @@
 package com.frezzcoding.savingsguru.functionalities.graphs.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -23,20 +25,18 @@ class GraphsAdapter(private val listener : OnClickListenerSavings) : ListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GraphViewHolder {
         val inflater : LayoutInflater = LayoutInflater.from(parent.context)
-        return GraphViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_estimated_savings, parent, false))
+        return GraphViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_estimated_savings, parent, false), listener)
     }
 
     override fun onBindViewHolder(holder: GraphViewHolder, position: Int) {
         getItem(position).let {
-            holder.bindTo(it)
-        }
-        holder.binding.tvAddAnother.setOnClickListener {
-            listener.addAnotherClick(getItem(position).id, position)
+            holder.bindTo(it, position)
         }
     }
 
     interface OnClickListenerSavings{
         fun addAnotherClick(id : Int, position : Int)
+        fun confirmSavings(id: Int)
     }
 
 
