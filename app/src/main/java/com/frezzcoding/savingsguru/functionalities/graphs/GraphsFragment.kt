@@ -64,18 +64,18 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
 
 
     override fun addAnotherClick(id: Int, position: Int) {
-        list?.forEach {
+        list.forEach {
             if (it.id == id) {
                 it.lastEntry = false
                 graphsAdapter.notifyItemChanged(position)
                 return@forEach
             }
         }
-        (list as ArrayList)?.add(EstimatedSavings())
+        (list as ArrayList).add(EstimatedSavings())
     }
 
-    override fun confirmSavings(id: Int) {
-        TODO("Not yet implemented")
+    override fun confirmSavings(amount: Int) {
+        println("amount $amount")
     }
 
 }

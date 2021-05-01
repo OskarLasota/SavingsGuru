@@ -22,4 +22,5 @@
     //graph fragment
     <string name="initial_savings_amount">Initial Savings</string>
     <string name="add_another">Add another</string>
+    <string name="confirm">Confirm</string>
 </resources>

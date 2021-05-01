@@ -40,7 +40,8 @@
             app:layout_constraintTop_toTopOf="@id/til_savings_amount"
             app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
             android:layout_marginLeft="20dp"
-            tools:text="confirm"
+            android:textColor="@color/blue"
+            android:text="@string/confirm"
             />
 
         <TextView
