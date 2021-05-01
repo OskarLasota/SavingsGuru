@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SavingsGuru">
         <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
