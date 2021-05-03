@@ -75,7 +75,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     override fun confirmSavings(amount: Int) {
-        println("amount $amount")
+        viewModel.addSavings(amount)
     }
 
 }

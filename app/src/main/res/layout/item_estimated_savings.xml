@@ -41,6 +41,7 @@
             app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
             android:layout_marginLeft="20dp"
             android:textColor="@color/blue"
+            android:visibility="gone"
             android:text="@string/confirm"
             />
 
