@@ -2,6 +2,7 @@ package com.frezzcoding.savingsguru.common.di
 
 import android.content.Context
 import androidx.room.Room
+import com.frezzcoding.savingsguru.common.NotificationManager
 import com.frezzcoding.savingsguru.data.database.AppDatabase
 import com.frezzcoding.savingsguru.data.database.SavingsDao
 import com.frezzcoding.savingsguru.data.database.ScenarioDao
@@ -37,6 +38,11 @@ object AppModule {
     @Provides
     fun provideCompositeDisposable() : CompositeDisposable {
         return CompositeDisposable()
+    }
+
+    @Provides
+    fun provideNotificationManager() : NotificationManager {
+        return NotificationManager()
     }
 
 }
