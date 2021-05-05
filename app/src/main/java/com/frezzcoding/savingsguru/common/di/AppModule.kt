@@ -25,6 +25,11 @@ object AppModule {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "database").build()
     }
 
+    //check if this causes memory leak
+    @Provides
+    @Singleton
+    fun provideContext(@ApplicationContext context: Context) = context
+
     @Provides
     fun provideScenarioDao(database: AppDatabase) : ScenarioDao{
         return database.scenarioDao()
