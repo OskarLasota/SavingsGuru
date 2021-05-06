@@ -16,4 +16,7 @@ interface SavingsDao {
     @Query("SELECT * FROM table_savings")
     fun getSavings() : Single<List<EstimatedSavings>>
 
+    @Query("UPDATE table_savings SET lastEntry =:status WHERE id=:id")
+    fun updateEntryStatus(id : Int, status : Boolean) : Completable
+
 }

@@ -19,4 +19,10 @@ class GraphRepoImpl @Inject constructor(val dao : SavingsDao): GraphRepo {
             return@defer dao.insert(entry)
         }
     }
+
+    override fun updateEntryStatus(id : Int, entry: Boolean): Completable {
+        return Completable.defer {
+            return@defer dao.updateEntryStatus(id, entry)
+        }
+    }
 }

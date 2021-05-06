@@ -23,6 +23,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private val viewModel by viewModels<GraphsViewModel>()
 
     private lateinit var list: List<EstimatedSavings>
+    val emptyEntry = EstimatedSavings(0, 0, 0,true)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +44,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private fun setupObservers() {
         viewModel.savings.observe(viewLifecycleOwner, {
             list = it
-            if(it.isEmpty()) (list as ArrayList).add(EstimatedSavings())
+            (list as ArrayList).add(emptyEntry)
             graphsAdapter.submitList(list)
         })
         viewModel.error.observe(viewLifecycleOwner, {
@@ -67,11 +68,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         list.forEach {
             if (it.id == id) {
                 it.lastEntry = false
+                viewModel.updateEntryStatus(id, false)
                 graphsAdapter.notifyItemChanged(position)
                 return@forEach
             }
         }
-        (list as ArrayList).add(EstimatedSavings())
+        val emptyEntry = EstimatedSavings(0, 0, 0,true)
+        (list as ArrayList).add(emptyEntry)
     }
 
     override fun confirmSavings(amount: Int) {

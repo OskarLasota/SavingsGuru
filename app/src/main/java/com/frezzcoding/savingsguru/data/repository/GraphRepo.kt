@@ -10,4 +10,6 @@ interface GraphRepo {
 
     fun addSavingsEntry(entry : EstimatedSavings) : Completable
 
+    fun updateEntryStatus(id : Int, entry : Boolean) : Completable
+
 }

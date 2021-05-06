@@ -45,7 +45,22 @@ class GraphsViewModel @Inject constructor(
 
     fun addSavings(amount : Int) {
         compositeDisposable.add(
-            repo.addSavingsEntry(EstimatedSavings(amount = amount))
+            repo.addSavingsEntry(EstimatedSavings(0, amount = amount, 0, false))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    _loading.postValue(true)
+                }.subscribe({
+                    _loading.postValue(false)
+                },{
+                    _loading.postValue(false)
+                })
+        )
+    }
+
+    fun updateEntryStatus(id : Int, last : Boolean){
+        compositeDisposable.add(
+            repo.updateEntryStatus(id, last)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
