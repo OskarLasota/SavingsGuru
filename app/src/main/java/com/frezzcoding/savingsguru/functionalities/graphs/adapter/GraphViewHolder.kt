@@ -25,6 +25,7 @@ class GraphViewHolder(
     }
 
     private fun initializeItem(){
+        binding.etSavingsAmount.text?.clear()
         binding.etSavingsAmount.text?.insert(0,estimatedSavings.amount.toString())
         if(estimatedSavings.lastEntry){
             binding.tilSavingsAmount.startIconDrawable =

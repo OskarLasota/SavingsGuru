@@ -43,10 +43,11 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     private fun setupObservers() {
-        viewModel.savings.observe(viewLifecycleOwner, {
-            list = it
+        viewModel.savings.observe(viewLifecycleOwner, { savingsList ->
+            list = savingsList
             (list as ArrayList).add(emptyEntry)
             graphsAdapter.submitList(list)
+            setupGraph(savingsList.map { it.amount })
         })
         viewModel.error.observe(viewLifecycleOwner, {
 
@@ -54,6 +55,10 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         viewModel.loading.observe(viewLifecycleOwner, {
 
         })
+    }
+
+    private fun setupGraph(list : List<Int>){
+        binding.lineGraph.setDataPoints(list)
     }
 
     private fun setupAdapter() {
