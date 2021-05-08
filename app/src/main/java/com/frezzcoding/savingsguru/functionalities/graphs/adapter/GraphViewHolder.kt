@@ -47,12 +47,17 @@ class GraphViewHolder(
         }
 
         binding.tvConfirm.setOnClickListener {
-            listener.confirmSavings(savingsAmount, position)
+            if(estimatedSavings.lastEntry){
+                listener.confirmSavings(savingsAmount, position)
+                binding.etSavingsAmount.text?.clear()
+            }else{
+                estimatedSavings.amount = savingsAmount
+                listener.updateSavings(estimatedSavings)
+            }
             binding.tvConfirm.visibility = View.GONE
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_money)
             lastEntryConfirmed = true
-            binding.etSavingsAmount.text?.clear()
         }
 
         binding.etSavingsAmount.doOnTextChanged { text, _, _, count ->

@@ -107,4 +107,8 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun updateSavings(estimatedSavings: EstimatedSavings) {
+        viewModel.updateEstimatedSavingsAmount(estimatedSavings)
+    }
+
 }

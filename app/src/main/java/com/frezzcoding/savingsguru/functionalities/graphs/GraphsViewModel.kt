@@ -63,14 +63,15 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
-    fun updateEntryStatus(id : Int, last : Boolean){
+    fun updateEstimatedSavingsAmount(estimatedSavings: EstimatedSavings){
         compositeDisposable.add(
-            repo.updateEntryStatus(id, last)
+            repo.updateSavingsEntry(estimatedSavings)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     _loading.postValue(true)
                 }.subscribe({
+                    getUpdatedSavings()
                     _loading.postValue(false)
                 },{
                     _loading.postValue(false)
@@ -78,8 +79,7 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
-
-    fun getUpdatedSavings() {
+    private fun getUpdatedSavings() {
         compositeDisposable.add(
             repo.getSavings()
                 .subscribeOn(Schedulers.io())

@@ -25,4 +25,11 @@ class GraphRepoImpl @Inject constructor(val dao : SavingsDao): GraphRepo {
             return@defer dao.updateEntryStatus(id, entry)
         }
     }
+
+    override fun updateSavingsEntry(estimatedSavings: EstimatedSavings): Completable {
+        return Completable.defer {
+            return@defer dao.updateSavingsAmount(estimatedSavings.id, estimatedSavings.amount)
+        }
+    }
+
 }

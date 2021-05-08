@@ -19,4 +19,7 @@ interface SavingsDao {
     @Query("UPDATE table_savings SET lastEntry =:status WHERE id=:id")
     fun updateEntryStatus(id : Int, status : Boolean) : Completable
 
+    @Query("UPDATE table_savings SET amount =:amount WHERE id=:id")
+    fun updateSavingsAmount(id: Int, amount: Int) : Completable
+
 }
