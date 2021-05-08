@@ -17,8 +17,11 @@ class GraphsViewModel @Inject constructor(
     val compositeDisposable: CompositeDisposable
 ) : ViewModel() {
 
-    private val _savings = MutableLiveData<List<EstimatedSavings>>()
-    val savings: LiveData<List<EstimatedSavings>> = _savings
+    private val _initialSavings = MutableLiveData<List<EstimatedSavings>>()
+    val initialSavings: LiveData<List<EstimatedSavings>> = _initialSavings
+
+    private val _updatedSavings = MutableLiveData<List<EstimatedSavings>>()
+    val updatedSavings : LiveData<List<EstimatedSavings>> = _updatedSavings
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -26,7 +29,7 @@ class GraphsViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun getSavings() {
+    fun getInitialSavings() {
         compositeDisposable.add(
             repo.getSavings()
                 .subscribeOn(Schedulers.io())
@@ -34,7 +37,7 @@ class GraphsViewModel @Inject constructor(
                 .doOnSubscribe {
                     _loading.postValue(true)
                 }.subscribe({
-                    _savings.postValue(it)
+                    _initialSavings.postValue(it)
                     _loading.postValue(false)
                 }, {
                     _error.postValue(it.toString())
@@ -52,6 +55,7 @@ class GraphsViewModel @Inject constructor(
                 .doOnSubscribe {
                     _loading.postValue(true)
                 }.subscribe({
+                    getUpdatedSavings()
                     _loading.postValue(false)
                 },{
                     _loading.postValue(false)
@@ -74,5 +78,22 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
+
+    fun getUpdatedSavings() {
+        compositeDisposable.add(
+            repo.getSavings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    _loading.postValue(true)
+                }.subscribe({
+                    _updatedSavings.postValue(it)
+                    _loading.postValue(false)
+                }, {
+                    _error.postValue(it.toString())
+                    _loading.postValue(false)
+                })
+        )
+    }
 
 }

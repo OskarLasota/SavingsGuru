@@ -40,11 +40,11 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         setupObservers()
-        viewModel.getSavings()
+        viewModel.getInitialSavings()
     }
 
     private fun setupObservers() {
-        viewModel.savings.observe(viewLifecycleOwner, { savingsList ->
+        viewModel.initialSavings.observe(viewLifecycleOwner, { savingsList ->
             list = savingsList
             (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
             if(list.size == 1) {
@@ -53,6 +53,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
                 binding.tvNoGraphMessage.visibility = View.GONE
                 setupGraph(savingsList.map { it.amount })
             }
+            graphsAdapter.submitList(list)
+        })
+        viewModel.updatedSavings.observe(viewLifecycleOwner, { updatedList ->
+            list = updatedList
+            (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
+            setupGraph(list.map { it.amount })
+            if(updatedList.isNotEmpty()) binding.tvNoGraphMessage.visibility = View.GONE
             graphsAdapter.submitList(list)
         })
         viewModel.error.observe(viewLifecycleOwner, {
@@ -94,9 +101,6 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     override fun confirmSavings(amount: Int, position: Int) {
         setLastEntryToFalse(position)
         viewModel.addSavings(amount)
-        val newGraphValues = ((list.map { it.amount }) as ArrayList<Int>)
-        newGraphValues.add(amount)
-        setupGraph(newGraphValues)
     }
 
     override fun notifyError(message: String) {

@@ -26,7 +26,7 @@ class GraphViewHolder(
 
     private fun initializeItem(){
         binding.etSavingsAmount.text?.clear()
-        binding.etSavingsAmount.text?.insert(0,if(estimatedSavings.id == 0 ) 0.toString() else estimatedSavings.amount.toString())
+        binding.etSavingsAmount.text?.insert(0,if(estimatedSavings.id == 0 ) "" else estimatedSavings.amount.toString())
         if(estimatedSavings.lastEntry){
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_new)
@@ -52,6 +52,7 @@ class GraphViewHolder(
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_money)
             lastEntryConfirmed = true
+            binding.etSavingsAmount.text?.clear()
         }
 
         binding.etSavingsAmount.doOnTextChanged { text, _, _, count ->
