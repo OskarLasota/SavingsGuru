@@ -101,6 +101,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     override fun confirmSavings(amount: Int, position: Int) {
         setLastEntryToFalse(position)
         viewModel.addSavings(amount)
+        graphsAdapter.notifyItemChanged(position)
     }
 
     override fun notifyError(message: String) {
