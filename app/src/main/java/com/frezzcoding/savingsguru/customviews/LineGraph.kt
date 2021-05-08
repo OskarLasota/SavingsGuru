@@ -179,6 +179,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
      */
 
     private fun drawGraphPlotAndLines(canvas: Canvas?){
+        mPath.reset()
         var originX = widthPerItem + paddingLeft
         val originY = zeroY - paddingForButtons
         mPath.moveTo(0f + paddingLeft, originY)
