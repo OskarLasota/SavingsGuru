@@ -26,24 +26,28 @@ class GraphViewHolder(
 
     private fun initializeItem(){
         binding.etSavingsAmount.text?.clear()
-        binding.etSavingsAmount.text?.insert(0,estimatedSavings.amount.toString())
+        binding.etSavingsAmount.text?.insert(0,if(estimatedSavings.id == 0 ) 0.toString() else estimatedSavings.amount.toString())
         if(estimatedSavings.lastEntry){
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_new)
+        }else{
+            binding.tilSavingsAmount.startIconDrawable =
+                ContextCompat.getDrawable(binding.root.context, R.drawable.ic_money)
         }
     }
 
     private fun setListeners(position : Int){
         binding.tvAddAnother.setOnClickListener {
-            if(estimatedSavings.lastEntry && lastEntryConfirmed) {
+            if(lastEntryConfirmed) {
                 listener.addAnotherClick(estimatedSavings.id, position)
+                binding.tvAddAnother.visibility = View.GONE
             }else{
                 listener.notifyError(binding.root.context.getString(R.string.error_confirm_your_entry))
             }
         }
 
         binding.tvConfirm.setOnClickListener {
-            listener.confirmSavings(savingsAmount)
+            listener.confirmSavings(savingsAmount, position)
             binding.tvConfirm.visibility = View.GONE
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_money)

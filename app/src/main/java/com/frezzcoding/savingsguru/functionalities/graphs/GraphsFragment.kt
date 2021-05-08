@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
@@ -46,9 +47,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         viewModel.savings.observe(viewLifecycleOwner, { savingsList ->
             list = savingsList
             (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
+            if(list.size == 1) {
+                binding.tvNoGraphMessage.visibility = View.VISIBLE
+            }else{
+                binding.tvNoGraphMessage.visibility = View.GONE
+                setupGraph(savingsList.map { it.amount })
+            }
             graphsAdapter.submitList(list)
-            if(savingsList.size > 1) binding.tvNoGraphMessage.visibility = View.GONE
-            setupGraph(savingsList.map { it.amount })
         })
         viewModel.error.observe(viewLifecycleOwner, {
 
@@ -65,26 +70,33 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private fun setupAdapter() {
         graphsAdapter = GraphsAdapter(this)
         binding.recyclerSavings.apply {
-            layoutManager = GridLayoutManager(requireContext(), 1)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = graphsAdapter
         }
     }
 
-
-    override fun addAnotherClick(id: Int, position: Int) {
+    private fun setLastEntryToFalse(position : Int ){
         list.forEach {
             if (it.id == id) {
                 it.lastEntry = false
-                viewModel.updateEntryStatus(id, false)
                 graphsAdapter.notifyItemChanged(position)
                 return@forEach
             }
         }
-        (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
     }
 
-    override fun confirmSavings(amount: Int) {
+    override fun addAnotherClick(id: Int, position: Int) {
+        (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
+        graphsAdapter.submitList(list)
+        graphsAdapter.notifyItemChanged(position+1)
+    }
+
+    override fun confirmSavings(amount: Int, position: Int) {
+        setLastEntryToFalse(position)
         viewModel.addSavings(amount)
+        val newGraphValues = ((list.map { it.amount }) as ArrayList<Int>)
+        newGraphValues.add(amount)
+        setupGraph(newGraphValues)
     }
 
     override fun notifyError(message: String) {

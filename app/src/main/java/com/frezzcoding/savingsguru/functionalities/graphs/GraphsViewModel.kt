@@ -52,7 +52,6 @@ class GraphsViewModel @Inject constructor(
                 .doOnSubscribe {
                     _loading.postValue(true)
                 }.subscribe({
-                    getSavings()
                     _loading.postValue(false)
                 },{
                     _loading.postValue(false)
