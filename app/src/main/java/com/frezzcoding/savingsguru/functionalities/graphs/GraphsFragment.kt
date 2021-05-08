@@ -15,6 +15,7 @@ import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
 import com.frezzcoding.savingsguru.functionalities.graphs.adapter.GraphsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_graph.*
+import kotlin.math.sign
 
 @AndroidEntryPoint
 class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
@@ -24,7 +25,6 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private val viewModel by viewModels<GraphsViewModel>()
 
     private lateinit var list: List<EstimatedSavings>
-    val emptyEntry = EstimatedSavings(0, 0, 0,true)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,8 +45,9 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private fun setupObservers() {
         viewModel.savings.observe(viewLifecycleOwner, { savingsList ->
             list = savingsList
-            (list as ArrayList).add(emptyEntry)
+            (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
             graphsAdapter.submitList(list)
+            if(savingsList.size > 1) binding.tvNoGraphMessage.visibility = View.GONE
             setupGraph(savingsList.map { it.amount })
         })
         viewModel.error.observe(viewLifecycleOwner, {
@@ -79,8 +80,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
                 return@forEach
             }
         }
-        val emptyEntry = EstimatedSavings(0, 0, 0,true)
-        (list as ArrayList).add(emptyEntry)
+        (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
     }
 
     override fun confirmSavings(amount: Int) {

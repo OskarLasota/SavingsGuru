@@ -18,7 +18,7 @@ class GraphsAdapter(private val listener : OnClickListenerSavings) : ListAdapter
         }
 
         override fun areContentsTheSame(oldItem: EstimatedSavings, newItem: EstimatedSavings): Boolean {
-            return oldItem.id == newItem.id //check content too
+            return oldItem.id == newItem.id || oldItem.amount == newItem.amount || oldItem.year == newItem.year
         }
 
     }

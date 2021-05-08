@@ -15,6 +15,16 @@
             android:id="@+id/line_graph"
             />
 
+        <TextView
+            android:id="@+id/tv_no_graph_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recycler_savings"
+            android:text="@string/no_data_for_graph"
+            android:gravity="center"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
