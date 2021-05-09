@@ -22,4 +22,7 @@ interface SavingsDao {
     @Query("UPDATE table_savings SET amount =:amount WHERE id=:id")
     fun updateSavingsAmount(id: Int, amount: Int) : Completable
 
+    @Query("DELETE from table_savings")
+    fun clearTable() : Completable
+
 }

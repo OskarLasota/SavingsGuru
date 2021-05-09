@@ -45,6 +45,9 @@ class SettingsFragment : Fragment() {
             }
             storeSelection(isChecked)
         }
+        binding.btnClearCache.setOnClickListener {
+            viewModel.clearRoomCache()
+        }
     }
 
 

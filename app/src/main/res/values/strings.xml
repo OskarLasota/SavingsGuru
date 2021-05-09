@@ -13,7 +13,11 @@
     <string name="savings_to_invest_ratio">Savings to Investment ratio</string>
     <string name="next">Next</string>
     <string name="create">Create</string>
+
+    //settings
     <string name="notify_monthly">Monthly savings notification</string>
+    <string name="clear_cache">Clear application cache</string>
+
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
