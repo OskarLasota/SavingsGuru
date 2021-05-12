@@ -96,4 +96,20 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
+    fun removeEstimatedSavings(savings: EstimatedSavings){
+        compositeDisposable.add(
+            repo.removeSavingsEntry(savings)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    _loading.postValue(true)
+                }.subscribe({
+                    _loading.postValue(false)
+                },{
+                    _error.postValue(it.toString())
+                    _loading.postValue(true)
+                })
+        )
+    }
+
 }

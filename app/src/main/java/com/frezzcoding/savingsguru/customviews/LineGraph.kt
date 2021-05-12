@@ -56,6 +56,10 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         invalidate()
     }
 
+    fun clearAxis(){
+        //todo clear the drawn axis
+    }
+
     private fun handleError(){
 
     }

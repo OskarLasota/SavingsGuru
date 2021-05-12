@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
@@ -40,7 +42,42 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         setupObservers()
+        setupListeners()
         viewModel.getInitialSavings()
+    }
+
+    private fun setupListeners(){
+        var touchHelper= ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun getSwipeDirs(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                if(list[viewHolder.adapterPosition].lastEntry) return 0
+                return super.getSwipeDirs(recyclerView, viewHolder)
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                removeSavingsInstance(viewHolder.adapterPosition)
+                (list as ArrayList<EstimatedSavings>).removeAt(viewHolder.adapterPosition)
+                graphsAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                setupGraph(list.map { it.amount })
+            }
+        })
+        touchHelper.attachToRecyclerView(binding.recyclerSavings)
+    }
+
+    private fun removeSavingsInstance(position : Int){
+        //show popup to confirm deletion?
+        println(position)
+        viewModel.removeEstimatedSavings(list[position])
     }
 
     private fun setupObservers() {
@@ -71,7 +108,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     private fun setupGraph(list : List<Int>){
-        binding.lineGraph.setDataPoints(list)
+        if(list.size > 1){
+            binding.lineGraph.setDataPoints(list)
+            binding.tvNoGraphMessage.visibility = View.GONE
+        }else{
+            binding.lineGraph.clearAxis()
+            binding.tvNoGraphMessage.visibility = View.VISIBLE
+        }
     }
 
     private fun setupAdapter() {

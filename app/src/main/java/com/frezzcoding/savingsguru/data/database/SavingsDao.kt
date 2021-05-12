@@ -25,4 +25,6 @@ interface SavingsDao {
     @Query("DELETE from table_savings")
     fun clearTable() : Completable
 
+    @Query("DELETE from table_savings WHERE id =:id")
+    fun removeSavings(id: Int) : Completable
 }

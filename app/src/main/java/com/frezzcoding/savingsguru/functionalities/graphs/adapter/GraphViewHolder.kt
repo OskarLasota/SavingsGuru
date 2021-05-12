@@ -60,6 +60,5 @@ class GraphViewHolder(
                 binding.tvConfirm.visibility = View.VISIBLE
             }
         }
-
     }
 }

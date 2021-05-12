@@ -6,21 +6,21 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GraphRepoImpl @Inject constructor(val dao : SavingsDao): GraphRepo {
+class GraphRepoImpl @Inject constructor(private val dao: SavingsDao) : GraphRepo {
 
     override fun getSavings(): Single<List<EstimatedSavings>> {
-        return Single.defer{
+        return Single.defer {
             return@defer dao.getSavings()
         }
     }
 
     override fun addSavingsEntry(entry: EstimatedSavings): Completable {
-        return Completable.defer{
+        return Completable.defer {
             return@defer dao.insert(entry)
         }
     }
 
-    override fun updateEntryStatus(id : Int, entry: Boolean): Completable {
+    override fun updateEntryStatus(id: Int, entry: Boolean): Completable {
         return Completable.defer {
             return@defer dao.updateEntryStatus(id, entry)
         }
@@ -29,6 +29,12 @@ class GraphRepoImpl @Inject constructor(val dao : SavingsDao): GraphRepo {
     override fun updateSavingsEntry(estimatedSavings: EstimatedSavings): Completable {
         return Completable.defer {
             return@defer dao.updateSavingsAmount(estimatedSavings.id, estimatedSavings.amount)
+        }
+    }
+
+    override fun removeSavingsEntry(estimatedSavings: EstimatedSavings): Completable {
+        return Completable.defer {
+            return@defer dao.removeSavings(estimatedSavings.id)
         }
     }
 
