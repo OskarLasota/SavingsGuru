@@ -37,15 +37,6 @@ class GraphViewHolder(
     }
 
     private fun setListeners(position : Int){
-        binding.tvAddAnother.setOnClickListener {
-            if(lastEntryConfirmed) {
-                listener.addAnotherClick(estimatedSavings.id, position)
-                binding.tvAddAnother.visibility = View.GONE
-            }else{
-                listener.notifyError(binding.root.context.getString(R.string.error_confirm_your_entry))
-            }
-        }
-
         binding.tvConfirm.setOnClickListener {
             if(estimatedSavings.lastEntry){
                 listener.confirmSavings(savingsAmount, position)
