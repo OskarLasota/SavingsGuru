@@ -46,6 +46,7 @@ class SettingsFragment : Fragment() {
             storeSelection(isChecked)
         }
         binding.btnClearCache.setOnClickListener {
+            //todo show popup
             viewModel.clearRoomCache()
         }
     }

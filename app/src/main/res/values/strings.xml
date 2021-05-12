@@ -17,7 +17,7 @@
     //settings
     <string name="notify_monthly">Monthly savings notification</string>
     <string name="clear_cache">Clear application cache</string>
-
+    <string name="clear"><u>Clear</u></string>
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
