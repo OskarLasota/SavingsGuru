@@ -1,5 +1,8 @@
 package com.frezzcoding.savingsguru.functionalities.settings
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +49,11 @@ class SettingsFragment : Fragment() {
             storeSelection(isChecked)
         }
         binding.btnClearCache.setOnClickListener {
-            //todo show popup
+            var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+                .setTitle(R.string.cache_cleared)
+                .setMessage("")
+                .setPositiveButton(R.string.ok, null)
+            dialog.show()
             viewModel.clearRoomCache()
         }
     }

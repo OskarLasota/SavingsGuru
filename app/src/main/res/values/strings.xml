@@ -18,6 +18,8 @@
     <string name="notify_monthly">Monthly savings notification</string>
     <string name="clear_cache">Clear application cache</string>
     <string name="clear"><u>Clear</u></string>
+    <string name="cache_cleared">Cache has been cleared!</string>
+    <string name="ok">ok</string>
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
