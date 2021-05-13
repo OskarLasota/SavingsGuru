@@ -30,6 +30,7 @@
     <string name="add_another">Add another</string>
     <string name="confirm">Confirm</string>
     <string name="no_data_for_graph">No data available to show graph</string>
+    <string name="entry_removed">Savings entry removed</string>
 
     //error messages
     <string name="error_confirm_your_entry">Confirm your entry first!</string>

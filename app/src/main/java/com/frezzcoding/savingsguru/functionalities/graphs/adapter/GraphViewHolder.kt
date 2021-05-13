@@ -20,6 +20,8 @@ class GraphViewHolder(
     fun bindTo(estimatedSavings: EstimatedSavings, position: Int) {
         this.estimatedSavings = estimatedSavings
         binding.estimatedSavings = estimatedSavings
+        println("here")
+        println(estimatedSavings.toString())
         setListeners(position)
         initializeItem()
     }

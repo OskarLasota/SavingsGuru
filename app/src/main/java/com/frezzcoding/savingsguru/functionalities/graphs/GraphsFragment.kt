@@ -1,5 +1,6 @@
 package com.frezzcoding.savingsguru.functionalities.graphs
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private lateinit var binding: FragmentGraphBinding
     private lateinit var graphsAdapter: GraphsAdapter
     private val viewModel by viewModels<GraphsViewModel>()
+    private var popupShown : Boolean = false
 
     private lateinit var list: List<EstimatedSavings>
 
@@ -76,8 +78,19 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
 
     private fun removeSavingsInstance(position : Int){
         //show popup to confirm deletion?
-        println(position)
+        showDialog()
         viewModel.removeEstimatedSavings(list[position])
+    }
+
+    private fun showDialog(){
+        if(popupShown) {
+            var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+                .setTitle(R.string.entry_removed)
+                .setMessage("")
+                .setPositiveButton(R.string.ok, null)
+            dialog.show()
+            popupShown = true
+        }
     }
 
     private fun setupObservers() {
@@ -98,6 +111,8 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
             setupGraph(list.map { it.amount })
             if(updatedList.isNotEmpty()) binding.tvNoGraphMessage.visibility = View.GONE
             graphsAdapter.submitList(list)
+            //todo this needs to be changed to updatePosition
+            graphsAdapter.notifyDataSetChanged()
         })
         viewModel.error.observe(viewLifecycleOwner, {
 
@@ -125,9 +140,10 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         }
     }
 
+    /*
     private fun setLastEntryToFalse(position : Int ){
         list.forEach {
-            if (it.id == id) {
+            if (it.lastEntry) {
                 it.lastEntry = false
                 graphsAdapter.notifyItemChanged(position)
                 return@forEach
@@ -135,14 +151,9 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         }
     }
 
-    override fun addAnotherClick(id: Int, position: Int) {
-        (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
-        graphsAdapter.submitList(list)
-        graphsAdapter.notifyItemChanged(position+1)
-    }
-
+     */
     override fun confirmSavings(amount: Int, position: Int) {
-        setLastEntryToFalse(position)
+        //setLastEntryToFalse(position)
         viewModel.addSavings(amount)
         graphsAdapter.notifyItemChanged(position)
     }

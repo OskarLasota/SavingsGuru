@@ -49,13 +49,17 @@ class SettingsFragment : Fragment() {
             storeSelection(isChecked)
         }
         binding.btnClearCache.setOnClickListener {
-            var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
-                .setTitle(R.string.cache_cleared)
-                .setMessage("")
-                .setPositiveButton(R.string.ok, null)
-            dialog.show()
+            showDialog()
             viewModel.clearRoomCache()
         }
+    }
+
+    private fun showDialog(){
+        var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+            .setTitle(R.string.cache_cleared)
+            .setMessage("")
+            .setPositiveButton(R.string.ok, null)
+        dialog.show()
     }
 
 

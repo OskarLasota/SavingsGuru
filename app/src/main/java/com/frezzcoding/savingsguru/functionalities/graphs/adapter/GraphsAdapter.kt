@@ -35,7 +35,6 @@ class GraphsAdapter(private val listener : OnClickListenerSavings) : ListAdapter
     }
 
     interface OnClickListenerSavings{
-        fun addAnotherClick(id : Int, position : Int)
         fun confirmSavings(amount: Int, position: Int)
         fun updateSavings(estimatedSavings: EstimatedSavings)
         fun notifyError(message : String)
