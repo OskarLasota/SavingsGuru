@@ -21,7 +21,7 @@ class GraphsViewModel @Inject constructor(
     val initialSavings: LiveData<List<EstimatedSavings>> = _initialSavings
 
     private val _updatedSavings = MutableLiveData<List<EstimatedSavings>>()
-    val updatedSavings : LiveData<List<EstimatedSavings>> = _updatedSavings
+    val updatedSavings: LiveData<List<EstimatedSavings>> = _updatedSavings
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -46,7 +46,7 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
-    fun addSavings(amount : Int) {
+    fun addSavings(amount: Int) {
         val newEntry = EstimatedSavings(0, amount = amount, 0, false)
         compositeDisposable.add(
             repo.addSavingsEntry(newEntry)
@@ -57,13 +57,13 @@ class GraphsViewModel @Inject constructor(
                 }.subscribe({
                     getUpdatedSavings()
                     _loading.postValue(false)
-                },{
+                }, {
                     _loading.postValue(false)
                 })
         )
     }
 
-    fun updateEstimatedSavingsAmount(estimatedSavings: EstimatedSavings){
+    fun updateEstimatedSavingsAmount(estimatedSavings: EstimatedSavings) {
         compositeDisposable.add(
             repo.updateSavingsEntry(estimatedSavings)
                 .subscribeOn(Schedulers.io())
@@ -73,7 +73,7 @@ class GraphsViewModel @Inject constructor(
                 }.subscribe({
                     getUpdatedSavings()
                     _loading.postValue(false)
-                },{
+                }, {
                     _loading.postValue(false)
                 })
         )
@@ -96,7 +96,7 @@ class GraphsViewModel @Inject constructor(
         )
     }
 
-    fun removeEstimatedSavings(savings: EstimatedSavings){
+    fun removeEstimatedSavings(savings: EstimatedSavings) {
         compositeDisposable.add(
             repo.removeSavingsEntry(savings)
                 .subscribeOn(Schedulers.io())
@@ -105,7 +105,7 @@ class GraphsViewModel @Inject constructor(
                     _loading.postValue(true)
                 }.subscribe({
                     _loading.postValue(false)
-                },{
+                }, {
                     _error.postValue(it.toString())
                     _loading.postValue(true)
                 })

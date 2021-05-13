@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +17,6 @@ import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
 import com.frezzcoding.savingsguru.functionalities.graphs.adapter.GraphsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_graph.*
-import kotlin.math.sign
 
 @AndroidEntryPoint
 class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
@@ -27,7 +24,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private lateinit var binding: FragmentGraphBinding
     private lateinit var graphsAdapter: GraphsAdapter
     private val viewModel by viewModels<GraphsViewModel>()
-    private var popupShown : Boolean = false
+    private var popupShown: Boolean = false
 
     private lateinit var list: List<EstimatedSavings>
 
@@ -48,8 +45,9 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         viewModel.getInitialSavings()
     }
 
-    private fun setupListeners(){
-        var touchHelper= ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+    private fun setupListeners() {
+        var touchHelper = ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -62,7 +60,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
             ): Int {
-                if(list[viewHolder.adapterPosition].lastEntry) return 0
+                if (list[viewHolder.adapterPosition].lastEntry) return 0
                 return super.getSwipeDirs(recyclerView, viewHolder)
             }
 
@@ -76,14 +74,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         touchHelper.attachToRecyclerView(binding.recyclerSavings)
     }
 
-    private fun removeSavingsInstance(position : Int){
-        //show popup to confirm deletion?
+    private fun removeSavingsInstance(position: Int) {
         showDialog()
         viewModel.removeEstimatedSavings(list[position])
     }
 
-    private fun showDialog(){
-        if(popupShown) {
+    private fun showDialog() {
+        if (popupShown) {
             var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
                 .setTitle(R.string.entry_removed)
                 .setMessage("")
@@ -96,10 +93,10 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private fun setupObservers() {
         viewModel.initialSavings.observe(viewLifecycleOwner, { savingsList ->
             list = savingsList
-            (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
-            if(list.size == 1) {
+            (list as ArrayList).add(EstimatedSavings(0, 0, 0, true))
+            if (list.size == 1) {
                 binding.tvNoGraphMessage.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.tvNoGraphMessage.visibility = View.GONE
                 setupGraph(savingsList.map { it.amount })
             }
@@ -107,12 +104,11 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         })
         viewModel.updatedSavings.observe(viewLifecycleOwner, { updatedList ->
             list = updatedList
-            (list as ArrayList).add(EstimatedSavings(0, 0, 0,true))
+            (list as ArrayList).add(EstimatedSavings(0, 0, 0, true))
             setupGraph(list.map { it.amount })
-            if(updatedList.isNotEmpty()) binding.tvNoGraphMessage.visibility = View.GONE
+            if (updatedList.isNotEmpty()) binding.tvNoGraphMessage.visibility = View.GONE
             graphsAdapter.submitList(list)
-            //todo this needs to be changed to updatePosition
-            graphsAdapter.notifyDataSetChanged()
+            graphsAdapter.notifyItemChanged(list.size - 2)
         })
         viewModel.error.observe(viewLifecycleOwner, {
 
@@ -122,11 +118,11 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         })
     }
 
-    private fun setupGraph(list : List<Int>){
-        if(list.size > 1){
+    private fun setupGraph(list: List<Int>) {
+        if (list.size > 1) {
             binding.lineGraph.setDataPoints(list)
             binding.tvNoGraphMessage.visibility = View.GONE
-        }else{
+        } else {
             binding.lineGraph.clearAxis()
             binding.tvNoGraphMessage.visibility = View.VISIBLE
         }
@@ -140,20 +136,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         }
     }
 
-    /*
-    private fun setLastEntryToFalse(position : Int ){
-        list.forEach {
-            if (it.lastEntry) {
-                it.lastEntry = false
-                graphsAdapter.notifyItemChanged(position)
-                return@forEach
-            }
-        }
-    }
-
-     */
     override fun confirmSavings(amount: Int, position: Int) {
-        //setLastEntryToFalse(position)
         viewModel.addSavings(amount)
         graphsAdapter.notifyItemChanged(position)
     }

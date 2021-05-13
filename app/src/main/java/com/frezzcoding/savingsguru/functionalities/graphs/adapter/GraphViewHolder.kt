@@ -14,36 +14,37 @@ class GraphViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var savingsAmount = 0
-    private lateinit var estimatedSavings : EstimatedSavings
+    private lateinit var estimatedSavings: EstimatedSavings
     private var lastEntryConfirmed = false
 
     fun bindTo(estimatedSavings: EstimatedSavings, position: Int) {
         this.estimatedSavings = estimatedSavings
         binding.estimatedSavings = estimatedSavings
-        println("here")
-        println(estimatedSavings.toString())
         setListeners(position)
         initializeItem()
     }
 
-    private fun initializeItem(){
+    private fun initializeItem() {
         binding.etSavingsAmount.text?.clear()
-        binding.etSavingsAmount.text?.insert(0,if(estimatedSavings.id == 0 ) "" else estimatedSavings.amount.toString())
-        if(estimatedSavings.lastEntry){
+        binding.etSavingsAmount.text?.insert(
+            0,
+            if (estimatedSavings.id == 0) "" else estimatedSavings.amount.toString()
+        )
+        if (estimatedSavings.lastEntry) {
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_new)
-        }else{
+        } else {
             binding.tilSavingsAmount.startIconDrawable =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.ic_money)
         }
     }
 
-    private fun setListeners(position : Int){
+    private fun setListeners(position: Int) {
         binding.tvConfirm.setOnClickListener {
-            if(estimatedSavings.lastEntry){
+            if (estimatedSavings.lastEntry) {
                 listener.confirmSavings(savingsAmount, position)
                 binding.etSavingsAmount.text?.clear()
-            }else{
+            } else {
                 estimatedSavings.amount = savingsAmount
                 listener.updateSavings(estimatedSavings)
             }
