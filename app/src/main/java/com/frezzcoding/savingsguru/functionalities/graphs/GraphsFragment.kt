@@ -80,7 +80,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     private fun showDialog() {
-        if (popupShown) {
+        if (!popupShown) {
             var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
                 .setTitle(R.string.entry_removed)
                 .setMessage("")
