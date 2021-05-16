@@ -45,10 +45,9 @@ class NewScenarioFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner, {
             Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
         })
-        viewModel.loading.observe(viewLifecycleOwner, {
-            if(it){
-                findNavController().navigate(R.id.action_addFragment_to_homeFragment)
-            }
+        viewModel.success.observe(viewLifecycleOwner, {
+            Toast.makeText(requireContext(), getString(R.string.entry_added, it.title), Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_addFragment_to_homeFragment)
         })
     }
 

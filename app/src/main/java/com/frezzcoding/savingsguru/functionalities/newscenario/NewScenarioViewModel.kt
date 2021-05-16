@@ -17,8 +17,8 @@ class NewScenarioViewModel @Inject constructor(
     private var compositeDisposable: CompositeDisposable
 ) : ViewModel() {
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
+    private val _success = MutableLiveData<Scenario>()
+    val success: LiveData<Scenario> = _success
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -27,10 +27,9 @@ class NewScenarioViewModel @Inject constructor(
         compositeDisposable.add(
             repo.addScenario(scenario)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe { _loading.value = true }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _loading.value = false
+                    _success.value = scenario
                 }, {
                     sendErrorMessage(it.toString())
                 })
