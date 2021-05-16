@@ -8,6 +8,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -15,11 +16,14 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityInstrumentedTest {
 
+
+    @Before
+    fun setUp(){
+        ActivityScenario.launch(MainActivity::class.java)
+    }
+
     @Test
     fun navigate_To_Settings_Fragment(){
-        //setup
-        ActivityScenario.launch(MainActivity::class.java)
-
         //nav directorsfragment
         onView(withId(R.id.settingsFragment)).perform(click())
 
@@ -38,9 +42,6 @@ class MainActivityInstrumentedTest {
 
     @Test
     fun navigate_To_Statistics_Fragment() {
-        //setup
-        ActivityScenario.launch(MainActivity::class.java)
-
         //nav directorsfragment
         onView(withId(R.id.statsFragment)).perform(click())
 
@@ -58,9 +59,6 @@ class MainActivityInstrumentedTest {
 
     @Test
     fun navigate_To_Graphs_Fragment() {
-        //setup
-        ActivityScenario.launch(MainActivity::class.java)
-
         //nav directorsfragment
         onView(withId(R.id.graphsFragment)).perform(click())
 
@@ -77,9 +75,6 @@ class MainActivityInstrumentedTest {
     }
     @Test
     fun navigate_To_new_scenario_Fragment() {
-        //setup
-        ActivityScenario.launch(MainActivity::class.java)
-
         //nav directorsfragment
         onView(withId(R.id.addFragment)).perform(click())
 
