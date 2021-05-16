@@ -32,9 +32,13 @@ class NewScenarioViewModel @Inject constructor(
                 .subscribe({
                     _loading.value = false
                 }, {
-                    _error.value = it.toString()
+                    sendErrorMessage(it.toString())
                 })
         )
+    }
+
+    fun sendErrorMessage(message : String) {
+        _error.postValue(message)
     }
 
 

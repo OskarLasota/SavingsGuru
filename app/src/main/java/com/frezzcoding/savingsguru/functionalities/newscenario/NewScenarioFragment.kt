@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.common.SeekBarOnProgressChanged
 import com.frezzcoding.savingsguru.data.models.Scenario
@@ -46,7 +47,7 @@ class NewScenarioFragment : Fragment() {
         })
         viewModel.loading.observe(viewLifecycleOwner, {
             if(it){
-                // navigate back
+                findNavController().navigate(R.id.action_addFragment_to_homeFragment)
             }
         })
     }
@@ -76,16 +77,34 @@ class NewScenarioFragment : Fragment() {
 
 
     private fun addEntry() {
-        viewModel.addScenario(
-            Scenario(
-                0,
-                binding.etTitle.text.toString(),
-                binding.etMonthlyExpenses.text.toString().toInt(),
-                binding.etMonthlyIncome.text.toString().toInt(),
-                binding.seekbarRatio.progress,
-                100 - binding.seekbarRatio.progress
+        if(validateInput()) {
+            viewModel.addScenario(
+                Scenario(
+                    0,
+                    binding.etTitle.text.toString(),
+                    binding.etMonthlyExpenses.text.toString().toInt(),
+                    binding.etMonthlyIncome.text.toString().toInt(),
+                    binding.seekbarRatio.progress,
+                    100 - binding.seekbarRatio.progress
+                )
             )
-        )
+        }
+    }
+
+    private fun validateInput() : Boolean {
+        if(binding.etTitle.text.toString().isNullOrEmpty()){
+            viewModel.sendErrorMessage(getString(R.string.error_title_empty))
+            return false
+        }
+        if(binding.etMonthlyExpenses.text.toString().isNullOrEmpty()){
+            viewModel.sendErrorMessage(getString(R.string.error_expenses_empty))
+            return false
+        }
+        if(binding.etMonthlyIncome.text.toString().isNullOrEmpty()){
+            viewModel.sendErrorMessage(getString(R.string.error_income_empty))
+            return false
+        }
+        return true
     }
 
 }

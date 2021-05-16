@@ -18,7 +18,11 @@
         android:id="@+id/addFragment"
         android:name="com.frezzcoding.savingsguru.functionalities.newscenario.NewScenarioFragment"
         tools:layout="@layout/fragment_newscenario"
-        android:label="@string/app_name" />
+        android:label="@string/app_name" >
+        <action
+            android:id="@+id/action_addFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.frezzcoding.savingsguru.functionalities.settings.SettingsFragment"
