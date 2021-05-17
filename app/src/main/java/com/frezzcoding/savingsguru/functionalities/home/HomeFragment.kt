@@ -1,5 +1,7 @@
 package com.frezzcoding.savingsguru.functionalities.home
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,13 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
                 R.id.action_homeFragment_to_scenarioFragment, bundleOf("id" to id)
             )
         }
+    }
+
+    override fun onLongScenarioClick(id: Int, position: Int) {
+        var dialog = Dialog(requireContext())
+            dialog.setContentView(R.layout.popup_savings_action)
+
+        dialog.show()
     }
 
 }

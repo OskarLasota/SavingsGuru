@@ -25,6 +25,9 @@
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>
     <string name="add_scenario">Add new Scenario</string>
+    <string name="remove">Remove</string>
+    <string name="open">Open</string>
+    <string name="select_action">Select action</string>
 
     //graph fragment
     <string name="initial_savings_amount">Initial Savings</string>

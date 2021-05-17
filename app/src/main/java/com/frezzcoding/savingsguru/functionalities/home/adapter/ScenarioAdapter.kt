@@ -37,11 +37,16 @@ class ScenarioAdapter(val listener : ScenarioClickListener) : ListAdapter<Scenar
             holder.itemView.setOnClickListener {
                 listener.onScenarioClick(scenario.id)
             }
+            holder.itemView.setOnLongClickListener {
+                listener.onLongScenarioClick(scenario.id, position)
+                true
+            }
         }
     }
 
     interface ScenarioClickListener{
         fun onScenarioClick(id : Int)
+        fun onLongScenarioClick(id : Int, position: Int)
     }
 
 }
