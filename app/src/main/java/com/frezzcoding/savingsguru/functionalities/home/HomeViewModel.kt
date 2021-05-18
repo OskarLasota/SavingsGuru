@@ -50,4 +50,18 @@ class HomeViewModel @Inject constructor(
                 })
         )
     }
+
+    fun removeScenario(id : Int){
+        compositeDisposable.add(
+            repo.removeScenario(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    getScenarios()
+                },{
+                    _error.value = it.toString()
+                })
+        )
+    }
+
 }

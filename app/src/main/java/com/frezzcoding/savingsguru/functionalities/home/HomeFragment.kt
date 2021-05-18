@@ -18,6 +18,7 @@ import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.databinding.FragmentHomeBinding
 import com.frezzcoding.savingsguru.functionalities.home.adapter.ScenarioAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.popup_savings_action.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
@@ -75,8 +76,20 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
     override fun onLongScenarioClick(id: Int, position: Int) {
         var dialog = Dialog(requireContext())
             dialog.setContentView(R.layout.popup_savings_action)
-
+        setActionDialogListeners(id, dialog)
         dialog.show()
+    }
+
+    private fun setActionDialogListeners(id : Int, dialog: Dialog){
+        dialog.btn_open.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_scenarioFragment, bundleOf("id" to id)
+            )
+        }
+        dialog.btn_remove.setOnClickListener {
+            viewModel.removeScenario(id)
+            dialog.dismiss()
+        }
     }
 
 }

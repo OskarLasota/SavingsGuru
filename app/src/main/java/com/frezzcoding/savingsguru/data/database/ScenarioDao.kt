@@ -17,7 +17,10 @@ interface ScenarioDao {
     @Query("SELECT * FROM table_scenarios")
     fun getScenarios() : Single<List<Scenario>>
 
-    @Query("SELECT * FROM table_scenarios WHERE id = :id")
+    @Query("SELECT * FROM table_scenarios WHERE id =:id")
     fun getScenario(id : Int) : Single<Scenario>
+
+    @Query("DELETE FROM table_scenarios WHERE id=:id")
+    fun removeScenario(id : Int) : Completable
 
 }
