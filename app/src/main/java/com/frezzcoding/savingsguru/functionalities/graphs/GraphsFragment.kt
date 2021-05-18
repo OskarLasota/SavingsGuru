@@ -120,6 +120,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
 
     private fun setupGraph(list: List<Int>) {
         if (list.size > 1) {
+            (list as ArrayList).removeLast()
             binding.lineGraph.setDataPoints(list)
             binding.tvNoGraphMessage.visibility = View.GONE
         } else {
