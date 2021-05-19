@@ -82,6 +82,7 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
 
     private fun setActionDialogListeners(id : Int, dialog: Dialog){
         dialog.btn_open.setOnClickListener {
+            dialog.dismiss()
             findNavController().navigate(
                 R.id.action_homeFragment_to_scenarioFragment, bundleOf("id" to id)
             )
