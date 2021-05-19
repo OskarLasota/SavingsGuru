@@ -73,8 +73,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             //handle empty graph
         }else {
             widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues)
-            var highestLowestDifference = highestValue - lowestValue
-            heightPerValue = (((height - paddingTop - paddingBottom).toDouble() / if(highestLowestDifference == 0)  1 else highestLowestDifference) * 0.9).toFloat()
+            var totalHeight = (height - paddingTop - paddingBottom).toFloat()
+            heightPerValue = totalHeight/highestValue
             zeroY = (height - paddingBottom).toFloat()
             initializePaint()
             drawGraphPlotAndLines(canvas)
@@ -95,7 +95,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
             if(i != 0){
                 canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toString(), x, y, textPaint)
             }else{
-                canvas?.drawText(lowestValue.toString(), x, y, textPaint)
+                canvas?.drawText(0.toString(), x, y, textPaint)
             }
         }
         canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
