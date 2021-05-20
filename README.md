@@ -26,4 +26,7 @@
   
 + Retrofit2 & Gson - Also implementing the REST API
 
-//todo accessibility features
+
+## Kanban Board with Roadmap
+
+https://github.com/OskarLasota/SavingsGuru/projects/1
