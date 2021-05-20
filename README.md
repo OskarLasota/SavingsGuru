@@ -30,3 +30,7 @@
 ## Kanban Board with Roadmap
 
 https://github.com/OskarLasota/SavingsGuru/projects/1
+
+## Google play store listing
+
+https://play.google.com/store/apps/details?id=com.frezzcoding.savingsguru
