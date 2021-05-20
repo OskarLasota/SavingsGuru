@@ -1,5 +1,7 @@
 # SavingsGuru
 
+##
+
 ## Tech Stack & Open-Library Sources : 
 + Minimum SDK level 21
 + 100% Kotlin  
@@ -27,7 +29,7 @@
 + Retrofit2 & Gson - Also implementing the REST API
 
 
-## Kanban Board with Roadmap
+## Kanban Board with Roadmap ( Feel free to contribute ) 
 
 https://github.com/OskarLasota/SavingsGuru/projects/1
 
