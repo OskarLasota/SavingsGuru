@@ -20,7 +20,10 @@
     <string name="clear_cache">Clear application cache</string>
     <string name="clear"><u>Clear</u></string>
     <string name="cache_cleared">Cache has been cleared!</string>
+    <string name="confirm_cache_removal">Are you sure you want to clear your cache?</string>
+    <string name="info_cache_removal">This will remove your savings and scenarios entries.</string>
     <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
 
     //home fragment
     <string name="select_financial_goal">Select Financial Goal</string>

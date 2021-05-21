@@ -23,4 +23,8 @@ interface ScenarioDao {
     @Query("DELETE FROM table_scenarios WHERE id=:id")
     fun removeScenario(id : Int) : Completable
 
+    @Query("DELETE from table_scenarios")
+    fun clearTable() : Completable
+
+
 }

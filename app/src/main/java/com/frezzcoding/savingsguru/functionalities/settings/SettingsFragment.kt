@@ -35,7 +35,16 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        setObservers()
         initializeSwitch()
+    }
+
+    private fun setObservers(){
+        viewModel.clearSuccess.observe(viewLifecycleOwner, {
+            if(it){
+                showInformationDialog()
+            }
+        })
     }
 
     private fun setListeners(){
@@ -49,12 +58,11 @@ class SettingsFragment : Fragment() {
             storeSelection(isChecked)
         }
         binding.btnClearCache.setOnClickListener {
-            showDialog()
-            viewModel.clearRoomCache()
+            showConfirmDialog()
         }
     }
 
-    private fun showDialog(){
+    private fun showInformationDialog(){
         var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             .setTitle(R.string.cache_cleared)
             .setMessage("")
@@ -62,6 +70,16 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
+    private fun showConfirmDialog(){
+        var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+            .setTitle(R.string.confirm_cache_removal)
+            .setMessage(R.string.info_cache_removal)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                viewModel.clearRoomCache()
+            }
+            .setNegativeButton(R.string.cancel, null)
+        dialog.show()
+    }
 
     private fun initializeSwitch(){
         //check sharedPreference or datastore
