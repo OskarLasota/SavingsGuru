@@ -48,16 +48,12 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         dataPoints.lowestNumber()?.let { lowestNumber ->
             lowestValue = lowestNumber
         }
-        if(highestValue - lowestValue == 0){
+        if(highestValue - lowestValue < 0){
             //handle divide by zero error
             handleError()
         }
         amountOfValues = dataPoints.size
         invalidate()
-    }
-
-    fun clearAxis(){
-        //todo clear the drawn axis
     }
 
     private fun handleError(){

@@ -103,6 +103,8 @@ class GraphsViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     _loading.postValue(true)
+                }.doOnComplete{
+                    getUpdatedSavings()
                 }.subscribe({
                     _loading.postValue(false)
                 }, {

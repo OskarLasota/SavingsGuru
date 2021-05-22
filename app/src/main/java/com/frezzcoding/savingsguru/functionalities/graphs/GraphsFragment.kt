@@ -94,19 +94,13 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         viewModel.initialSavings.observe(viewLifecycleOwner, { savingsList ->
             list = savingsList
             (list as ArrayList).add(EstimatedSavings(0, 0, 0, true))
-            if (list.size == 1) {
-                binding.tvNoGraphMessage.visibility = View.VISIBLE
-            } else {
-                binding.tvNoGraphMessage.visibility = View.GONE
-                setupGraph(savingsList.map { it.amount })
-            }
+            setupGraph(list.map { it.amount })
             graphsAdapter.submitList(list)
         })
         viewModel.updatedSavings.observe(viewLifecycleOwner, { updatedList ->
             list = updatedList
             (list as ArrayList).add(EstimatedSavings(0, 0, 0, true))
             setupGraph(list.map { it.amount })
-            if (updatedList.isNotEmpty()) binding.tvNoGraphMessage.visibility = View.GONE
             graphsAdapter.submitList(list)
             graphsAdapter.notifyItemChanged(list.size - 2)
         })
@@ -119,12 +113,12 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     private fun setupGraph(list: List<Int>) {
+        (list as ArrayList).removeLast()
         if (list.size > 1) {
-            (list as ArrayList).removeLast()
             binding.lineGraph.setDataPoints(list)
             binding.tvNoGraphMessage.visibility = View.GONE
         } else {
-            binding.lineGraph.clearAxis()
+            binding.lineGraph.setDataPoints(list)
             binding.tvNoGraphMessage.visibility = View.VISIBLE
         }
     }
