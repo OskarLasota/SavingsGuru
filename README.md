@@ -1,5 +1,7 @@
 # SavingsGuru
 
+##
+
 ## Tech Stack & Open-Library Sources : 
 + Minimum SDK level 21
 + 100% Kotlin  
@@ -26,4 +28,11 @@
   
 + Retrofit2 & Gson - Also implementing the REST API
 
-//todo accessibility features
+
+## Kanban Board with Roadmap ( Feel free to contribute ) 
+
+https://github.com/OskarLasota/SavingsGuru/projects/1
+
+## Google play store listing
+
+https://play.google.com/store/apps/details?id=com.frezzcoding.savingsguru
