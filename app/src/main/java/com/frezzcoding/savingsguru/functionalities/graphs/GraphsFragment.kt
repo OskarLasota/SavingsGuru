@@ -82,8 +82,8 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private fun showDialog() {
         if (!popupShown) {
             var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
-                .setTitle(R.string.entry_removed)
-                .setMessage("")
+                .setTitle("")
+                .setMessage(R.string.entry_removed)
                 .setPositiveButton(R.string.ok, null)
             dialog.show()
             popupShown = true

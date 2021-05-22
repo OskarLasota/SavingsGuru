@@ -64,8 +64,8 @@ class SettingsFragment : Fragment() {
 
     private fun showInformationDialog(){
         var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
-            .setTitle(R.string.cache_cleared)
-            .setMessage("")
+            .setTitle("")
+            .setMessage(R.string.cache_cleared)
             .setPositiveButton(R.string.ok, null)
         dialog.show()
     }
