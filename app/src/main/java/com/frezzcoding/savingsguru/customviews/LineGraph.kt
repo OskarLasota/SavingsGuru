@@ -89,13 +89,32 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         for(i in 0..amountOfGraduations){
             y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) )
             if(i != 0){
-                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toString(), x, y, textPaint)
+                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toInt().toString(), x, y, textPaint)
+                drawAxis(canvas, y)
             }else{
                 canvas?.drawText(0.toString(), x, y, textPaint)
             }
         }
         canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
     }
+
+    private fun drawAxis(canvas: Canvas?, yAxis : Float) {
+        val dottedPaint = Paint()
+        dottedPaint.style = Paint.Style.STROKE
+        dottedPaint.strokeWidth = 3F
+        dottedPaint.pathEffect = DashPathEffect(floatArrayOf(22F, 22F), 0f)
+
+        for(i in 1..width step width / 10){
+            mPath.reset()
+            mPath.moveTo(i.toFloat(), yAxis)
+            mPath.lineTo(i+20f, yAxis)
+            canvas?.drawPath(mPath, dottedPaint)
+        }
+
+        //canvas?.drawLine(xAxisTotal, yAxisTotal, xAxisTotal, (height - 10).toFloat(), mBlackPaint)
+        //canvas?.drawLine(10F, height - yAxisTotal, width - xAxisTotal, height - yAxisTotal, mBlackPaint)
+    }
+
 
     /*
     private fun drawButtons(canvas: Canvas?){
