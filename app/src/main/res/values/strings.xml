@@ -47,4 +47,7 @@
     <string name="error_title_empty">Please insert your title</string>
     <string name="error_expenses_empty">Please insert your monthly expenses</string>
     <string name="error_income_empty">Please insert your monthly income</string>
+
+    //notifications
+    <string name="update_your_savings">Time to update your savings!</string>
 </resources>

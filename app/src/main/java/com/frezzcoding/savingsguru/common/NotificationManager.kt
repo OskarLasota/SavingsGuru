@@ -13,15 +13,23 @@ import java.util.*
 
 class NotificationManager : BroadcastReceiver() {
 
+    private val TIME_IN_MONTH = 2_629_743_833L
 
     override fun onReceive(context: Context, intent: Intent?) {
-        val builder : NotificationCompat.Builder = NotificationCompat.Builder(context, "notification")
-            .setSmallIcon(R.drawable.logo)
-            .setContentTitle("Notification title")
-            .setContentText("Context text")
-            .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java),0))
+        val builder: NotificationCompat.Builder =
+            NotificationCompat.Builder(context, "notification")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(context.getString(R.string.update_your_savings))
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(
+                    PendingIntent.getActivity(
+                        context,
+                        0,
+                        Intent(context, MainActivity::class.java),
+                        0
+                    )
+                )
 
         val notificationManager = NotificationManagerCompat.from(context)
 
@@ -31,12 +39,16 @@ class NotificationManager : BroadcastReceiver() {
     }
 
 
-    fun setupNewNotification(context : Context){
+    fun setupNewNotification(context: Context) {
         val intent = Intent(context, NotificationManager::class.java)
         val pi =
             PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        am.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().time.time + 60000,60000, pi)
-
+        am.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            Calendar.getInstance().time.time + TIME_IN_MONTH,
+            TIME_IN_MONTH,
+            pi
+        )
     }
 }
