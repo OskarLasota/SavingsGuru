@@ -104,7 +104,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         dottedPaint.strokeWidth = 3F
         dottedPaint.pathEffect = DashPathEffect(floatArrayOf(22F, 22F), 0f)
 
-        for(i in 1..width step width / 10){
+        for(i in 1..(width*0.9).toInt() step width / 10){
             mPath.reset()
             mPath.moveTo(i.toFloat(), yAxis)
             mPath.lineTo(i+20f, yAxis)
