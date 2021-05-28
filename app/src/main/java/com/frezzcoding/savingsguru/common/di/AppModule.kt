@@ -2,6 +2,7 @@ package com.frezzcoding.savingsguru.common.di
 
 import android.content.Context
 import androidx.room.Room
+import com.frezzcoding.savingsguru.common.HintManager
 import com.frezzcoding.savingsguru.common.NotificationManager
 import com.frezzcoding.savingsguru.data.database.AppDatabase
 import com.frezzcoding.savingsguru.data.database.SavingsDao
@@ -29,6 +30,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideContext(@ApplicationContext context: Context) = context
+
+    @Provides
+    @Singleton
+    fun provideHintManager(context: Context) = HintManager(context)
 
     @Provides
     fun provideScenarioDao(database: AppDatabase) : ScenarioDao{

@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frezzcoding.savingsguru.R
+import com.frezzcoding.savingsguru.common.HintManager
 import com.frezzcoding.savingsguru.data.models.EstimatedSavings
 import com.frezzcoding.savingsguru.databinding.FragmentGraphBinding
 import com.frezzcoding.savingsguru.functionalities.graphs.adapter.GraphsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
@@ -24,8 +27,10 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private lateinit var binding: FragmentGraphBinding
     private lateinit var graphsAdapter: GraphsAdapter
     private val viewModel by viewModels<GraphsViewModel>()
-    private var popupShown: Boolean = false
+    @Inject
+    lateinit var hintManager: HintManager
 
+    private var popupShown: Boolean = false
     private lateinit var list: List<EstimatedSavings>
 
     override fun onCreateView(
@@ -43,6 +48,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
         setupObservers()
         setupListeners()
         viewModel.getInitialSavings()
+        //hintManager.showSwipeToRemoveHint()
     }
 
     private fun setupListeners() {

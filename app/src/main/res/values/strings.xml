@@ -50,4 +50,7 @@
 
     //notifications
     <string name="update_your_savings">Time to update your savings!</string>
+
+    //hints
+    <string name="hint_swipe_to_remove">Hint : You can swipe to remove an entry !</string>
 </resources>
