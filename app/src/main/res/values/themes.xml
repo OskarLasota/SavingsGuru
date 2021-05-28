@@ -26,9 +26,9 @@
 
 
     <style name="Widget.MaterialComponents.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="android:background">@color/white</item>
-        <item name="itemIconTint">@color/dark_grey</item>
-        <item name="itemTextColor">@color/dark_grey</item>
+        <item name="android:background">@drawable/rounded_bottomnavbar</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
     </style>
 
     <style name="H0" >
