@@ -58,6 +58,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     testImplementation "org.robolectric:robolectric:4.5.1"
+    implementation "androidx.preference:preference-ktx:1.1.1"
 
     //navigation library
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
