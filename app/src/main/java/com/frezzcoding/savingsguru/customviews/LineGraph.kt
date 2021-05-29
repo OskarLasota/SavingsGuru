@@ -80,7 +80,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
 
     private fun drawGraduations(canvas: Canvas?){
-        val x = (widthPerItem * amountOfValues.toFloat()) + 15 + paddingRight
+        val x = (widthPerItem * amountOfValues.toFloat()) + paddingRight
         var y : Float
         val textPaint = Paint()
         textPaint.color = Color.GRAY
