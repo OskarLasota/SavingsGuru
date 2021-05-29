@@ -14,6 +14,8 @@ import java.util.*
 class NotificationManager : BroadcastReceiver() {
 
     private val TIME_IN_MONTH = 2_629_743_833L
+    private val NOTIFICATION_ID = 200
+
 
     override fun onReceive(context: Context, intent: Intent?) {
         val builder: NotificationCompat.Builder =
@@ -35,14 +37,14 @@ class NotificationManager : BroadcastReceiver() {
 
         setupNewNotification(context)
 
-        notificationManager.notify(200, builder.build())
+        notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
 
     fun setupNewNotification(context: Context) {
         val intent = Intent(context, NotificationManager::class.java)
         val pi =
-            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.setRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -51,4 +53,12 @@ class NotificationManager : BroadcastReceiver() {
             pi
         )
     }
+
+    fun disableNotifications(context : Context){
+        val intent = Intent(context, NotificationManager::class.java)
+        var pi =PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        am.cancel(pi)
+    }
+
 }

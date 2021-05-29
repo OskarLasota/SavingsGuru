@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    val notificationManager: NotificationManager,
-    val context: Context,
-    val savingsDao: SavingsDao,
-    val scenarioDao: ScenarioDao,
+    private val notificationManager: NotificationManager,
+    private val context: Context,
+    private val savingsDao: SavingsDao,
+    private val scenarioDao: ScenarioDao,
     var compositeDisposable: CompositeDisposable
 ) : ViewModel() {
 
@@ -31,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun disableNotifications() {
-
+        notificationManager.disableNotifications(context)
     }
 
     fun clearRoomCache() {
