@@ -40,5 +40,16 @@ class SettingsFragmentInstrumentedTest {
         onView(withText(R.string.confirm_cache_removal)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun check_if_all_dialogs_displayed_on_clearing_cache(){
+        onView(withId(R.id.btn_clear_cache)).perform(click())
+
+        onView(withText(R.string.confirm_cache_removal)).check(matches(isDisplayed()))
+
+        onView(withText(R.string.ok)).perform(click())
+
+        onView(withText(R.string.cache_cleared)).check(matches(isDisplayed()))
+    }
+
 
 }
