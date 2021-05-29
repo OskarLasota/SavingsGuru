@@ -11,14 +11,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.frezzcoding.savingsguru.R
+import com.frezzcoding.savingsguru.common.SPManager
 import com.frezzcoding.savingsguru.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     private lateinit var binding : FragmentSettingsBinding
     private val viewModel by viewModels<SettingsViewModel>()
+    @Inject
+    lateinit var spManager : SPManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +40,11 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         setObservers()
-        initializeSwitch()
+        initialiseUI()
+    }
+
+    private fun initialiseUI(){
+        binding.switchNotification.isChecked = spManager.getNotificationIsSwitchedOn()
     }
 
     private fun setObservers(){
@@ -81,12 +89,8 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
-    private fun initializeSwitch(){
-        //check sharedPreference or datastore
-    }
-
     private fun storeSelection(isChecked : Boolean){
-        //store selection in sharedPreferences or datastore
+        spManager.setNotificationSwitchState(isChecked)
     }
 
 }
