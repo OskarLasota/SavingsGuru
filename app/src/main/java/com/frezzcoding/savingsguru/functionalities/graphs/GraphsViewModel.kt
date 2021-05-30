@@ -8,6 +8,7 @@ import com.frezzcoding.savingsguru.data.repository.GraphRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,7 +39,7 @@ class GraphsViewModel @Inject constructor(
                     _initialSavings.postValue(it)
                     _loading.postValue(false)
                 }, {
-                    _error.postValue(it.toString())
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                     _loading.postValue(false)
                 })
         }
@@ -57,6 +58,7 @@ class GraphsViewModel @Inject constructor(
                     _loading.postValue(false)
                 }, {
                     _loading.postValue(false)
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
@@ -73,6 +75,7 @@ class GraphsViewModel @Inject constructor(
                     _loading.postValue(false)
                 }, {
                     _loading.postValue(false)
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
@@ -88,8 +91,8 @@ class GraphsViewModel @Inject constructor(
                     _updatedSavings.postValue(it)
                     _loading.postValue(false)
                 }, {
-                    _error.postValue(it.toString())
                     _loading.postValue(false)
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
@@ -106,8 +109,8 @@ class GraphsViewModel @Inject constructor(
                 }.subscribe({
                     _loading.postValue(false)
                 }, {
-                    _error.postValue(it.toString())
-                    _loading.postValue(true)
+                    _loading.postValue(false)
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }

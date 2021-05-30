@@ -8,6 +8,7 @@ import com.frezzcoding.savingsguru.data.repository.NewScenarioRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +30,7 @@ class NewScenarioViewModel @Inject constructor(
                 .subscribe({
                     _success.value = scenario
                 }, {
-                    sendErrorMessage(it.toString())
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
@@ -37,6 +38,5 @@ class NewScenarioViewModel @Inject constructor(
     fun sendErrorMessage(message: String) {
         _error.postValue(message)
     }
-
 
 }

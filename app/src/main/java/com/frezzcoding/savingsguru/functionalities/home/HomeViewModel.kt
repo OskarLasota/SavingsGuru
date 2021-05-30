@@ -8,6 +8,7 @@ import com.frezzcoding.savingsguru.data.repository.ScenarioRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,6 +46,7 @@ class HomeViewModel @Inject constructor(
                     _loading.value = false
                 }, {
                     _error.value = it.toString()
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
@@ -58,6 +60,7 @@ class HomeViewModel @Inject constructor(
                     getScenarios()
                 }, {
                     _error.value = it.toString()
+                    Timber.d("ViewModel: %s %s", this, it.toString())
                 })
         }
     }
