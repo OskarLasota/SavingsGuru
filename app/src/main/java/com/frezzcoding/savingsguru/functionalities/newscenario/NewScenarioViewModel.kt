@@ -2,20 +2,18 @@ package com.frezzcoding.savingsguru.functionalities.newscenario
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.frezzcoding.savingsguru.common.AbstractViewModel
 import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.data.repository.NewScenarioRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class NewScenarioViewModel @Inject constructor(
-    var repo: NewScenarioRepo,
-    private var compositeDisposable: CompositeDisposable
-) : ViewModel() {
+    var repo: NewScenarioRepo
+) : AbstractViewModel() {
 
     private val _success = MutableLiveData<Scenario>()
     val success: LiveData<Scenario> = _success
@@ -24,7 +22,7 @@ class NewScenarioViewModel @Inject constructor(
     val error: LiveData<String> = _error
 
     fun addScenario(scenario: Scenario) {
-        compositeDisposable.add(
+        launch {
             repo.addScenario(scenario)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -33,10 +31,10 @@ class NewScenarioViewModel @Inject constructor(
                 }, {
                     sendErrorMessage(it.toString())
                 })
-        )
+        }
     }
 
-    fun sendErrorMessage(message : String) {
+    fun sendErrorMessage(message: String) {
         _error.postValue(message)
     }
 

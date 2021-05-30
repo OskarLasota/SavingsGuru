@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.frezzcoding.savingsguru.common.AbstractViewModel
 import com.frezzcoding.savingsguru.common.NotificationManager
 import com.frezzcoding.savingsguru.data.database.SavingsDao
 import com.frezzcoding.savingsguru.data.database.ScenarioDao
@@ -18,9 +19,8 @@ class SettingsViewModel @Inject constructor(
     private val notificationManager: NotificationManager,
     private val context: Context,
     private val savingsDao: SavingsDao,
-    private val scenarioDao: ScenarioDao,
-    var compositeDisposable: CompositeDisposable
-) : ViewModel() {
+    private val scenarioDao: ScenarioDao
+) : AbstractViewModel() {
 
 
     private val _clearSuccess = MutableLiveData<Boolean>()
@@ -35,7 +35,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun clearRoomCache() {
-        compositeDisposable.add(
+        launch{
             savingsDao.clearTable()
                 .mergeWith(scenarioDao.clearTable())
                 .subscribeOn(Schedulers.io())
@@ -45,8 +45,7 @@ class SettingsViewModel @Inject constructor(
                 },{
 
                 })
-
-        )
+        }
     }
 
 }

@@ -2,20 +2,18 @@ package com.frezzcoding.savingsguru.functionalities.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.frezzcoding.savingsguru.common.AbstractViewModel
 import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.data.repository.ScenarioRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repo: ScenarioRepo,
-    private val compositeDisposable: CompositeDisposable
-) : ViewModel() {
+    private val repo: ScenarioRepo
+) : AbstractViewModel() {
 
     private val _scenarios = MutableLiveData<List<Scenario>>()
     val scenarios: LiveData<List<Scenario>> = _scenarios
@@ -27,7 +25,7 @@ class HomeViewModel @Inject constructor(
     val error: LiveData<String> = _error
 
     fun getScenarios() {
-        compositeDisposable.add(
+        launch {
             repo.getScenarios()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,20 +46,20 @@ class HomeViewModel @Inject constructor(
                 }, {
                     _error.value = it.toString()
                 })
-        )
+        }
     }
 
-    fun removeScenario(id : Int){
-        compositeDisposable.add(
+    fun removeScenario(id: Int) {
+        launch {
             repo.removeScenario(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     getScenarios()
-                },{
+                }, {
                     _error.value = it.toString()
                 })
-        )
+        }
     }
 
 }
