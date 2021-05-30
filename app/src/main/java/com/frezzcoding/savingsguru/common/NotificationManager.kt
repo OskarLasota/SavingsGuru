@@ -11,7 +11,7 @@ import com.frezzcoding.savingsguru.MainActivity
 import com.frezzcoding.savingsguru.R
 import java.util.*
 
-class NotificationManager : BroadcastReceiver() {
+class NotificationManager(val context: Context) : BroadcastReceiver() {
 
     private val TIME_IN_MONTH = 2_629_743_833L
     private val NOTIFICATION_ID = 200
@@ -35,13 +35,13 @@ class NotificationManager : BroadcastReceiver() {
 
         val notificationManager = NotificationManagerCompat.from(context)
 
-        setupNewNotification(context)
+        setupNewNotification()
 
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
 
-    fun setupNewNotification(context: Context) {
+    fun setupNewNotification() {
         val intent = Intent(context, NotificationManager::class.java)
         val pi =
             PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -54,7 +54,7 @@ class NotificationManager : BroadcastReceiver() {
         )
     }
 
-    fun disableNotifications(context : Context){
+    fun disableNotifications(){
         val intent = Intent(context, NotificationManager::class.java)
         var pi =PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT)
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager

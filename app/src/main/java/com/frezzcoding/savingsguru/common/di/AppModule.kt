@@ -59,11 +59,11 @@ object AppModule {
     }
 
     @Provides
-    fun provideNotificationManager() : NotificationManager {
-        return NotificationManager()
+    fun provideNotificationManager(context: Context) : NotificationManager {
+        return NotificationManager(context)
     }
 
     @Provides
-    fun provideSharedPreferences(context: Context) = PreferenceManager.getDefaultSharedPreferences(context)
+    fun provideSharedPreferences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
 }
