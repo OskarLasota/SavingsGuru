@@ -17,7 +17,7 @@
    + Jetpack Navigation Components
 + Firebase Notifications ( todo )
 + Data Binding
-+ Custom Views ( todo )
++ Custom Views
 + Architecture
    + MVVM Architecture (View - DataBinding - ViewModel - Model)
    + Repository pattern
