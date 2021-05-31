@@ -14,7 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
-
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="borderlessButtonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+        <item name="android:background">@color/light_grey</item>
+        <item name="colorOnPrimary">@color/link_blue</item>
+    </style>
 
     <style name="Widget.MaterialComponents.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@drawable/rounded_bottomnavbar_nightmode</item>
