@@ -28,6 +28,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private var graduationPadding : Float = 100f
     private var amountOfGraduations = 6
     private var highestY = 0f
+    private var widthPerValueDigit = 5
 
 
     //todo compatibility with negative numbers
@@ -68,8 +69,8 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         }else if (dataPoints.size < 2) {
             //handle empty graph
         }else {
-            widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues)
-            var totalHeight = (height - paddingTop - paddingBottom).toFloat()
+            widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues) - (highestValue.toString().length * widthPerValueDigit)
+            val totalHeight = (height - paddingTop - paddingBottom).toFloat()
             heightPerValue = totalHeight/highestValue
             zeroY = (height - paddingBottom).toFloat()
             initializePaint()
@@ -82,6 +83,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     private fun drawGraduations(canvas: Canvas?){
         val x = (widthPerItem * amountOfValues.toFloat()) + paddingRight
         var y : Float
+        val padding = 20
         val textPaint = Paint()
         textPaint.color = Color.GRAY
         textPaint.style = Paint.Style.FILL_AND_STROKE
@@ -89,13 +91,13 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         for(i in 0..amountOfGraduations){
             y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) )
             if(i != 0){
-                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toInt().toString(), x, y, textPaint)
+                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toInt().toString(), x + padding, y, textPaint)
                 drawAxis(canvas, y)
             }else{
-                canvas?.drawText(0.toString(), x, y, textPaint)
+                canvas?.drawText(0.toString(), x+padding, y, textPaint)
             }
         }
-        canvas?.drawText(highestValue.toString(), x, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
+        canvas?.drawText(highestValue.toString(), x+padding, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
     }
 
     private fun drawAxis(canvas: Canvas?, yAxis : Float) {

@@ -35,7 +35,7 @@
             style="@style/H3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Monthly Expenses" />
+            android:text="@string/select_monthly_expenses" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_monthly_expenses"
@@ -48,6 +48,7 @@
                 android:id="@+id/et_monthly_expenses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="9"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +57,7 @@
             style="@style/H3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Specify Monthly Income" />
+            android:text="@string/specify_monthly_income" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_income"
@@ -69,6 +70,7 @@
                 android:id="@+id/et_monthly_income"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="9"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
