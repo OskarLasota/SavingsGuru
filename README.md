@@ -17,16 +17,16 @@
    + Jetpack Navigation Components
 + Firebase Notifications ( todo )
 + Data Binding
-+ Custom Views
++ Custom Views ( Line Graph ) 
 + Architecture
-   + MVVM Architecture (View - DataBinding - ViewModel - Model)
+   + MVVM Architecture (View - ViewModel - Model)
    + Repository pattern
    + One Activity pattern
 
 + Material Design & Animations
    + LottieFlies
   
-+ Retrofit2 & Gson - Also implementing the REST API
++ Retrofit2 & Gson - Also implementing the REST API with NodeJS
 
 
 ## Kanban Board with Roadmap ( Feel free to contribute ) 
