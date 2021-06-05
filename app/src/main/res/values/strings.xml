@@ -14,7 +14,13 @@
     <string name="next">Next</string>
     <string name="create">Create</string>
     <string name="entry_added">%s has been added</string>
-
+    
+    //scenario fragment
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="investment_to_savings">Investment to Savings Ratio</string>
+    <string name="currency">£</string>
+    
     //settings
     <string name="notify_monthly">Monthly savings notification</string>
     <string name="clear_cache">Clear application cache</string>
