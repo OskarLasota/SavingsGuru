@@ -47,6 +47,8 @@ class ScenarioFragment : Fragment() {
 
         binding.pbIncome.progress = scenario.income
         binding.pbExpenses.progress = scenario.expenses
+        binding.pbInvestSavingsRatio.progress = scenario.savingsRatio
+
         binding.tvExpenses.text = getString(R.string.currency) + scenario.expenses.toString()
         binding.tvIncome.text = getString(R.string.currency) + scenario.income.toString()
         binding.tvInvestmentRatio.text = scenario.investmentRatio.toString()
