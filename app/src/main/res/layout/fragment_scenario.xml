@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{'£'+Integer.toString(viewmodel.scenario.income)}"
+                    android:text="@{String.format(@string/currency, viewmodel.scenario.income)}"
                     tools:text="0"
                     />
                 <TextView
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@{'£'+Integer.toString(viewmodel.scenario.expenses)}"
+                        android:text="@{String.format(@string/currency, viewmodel.scenario.expenses)}"
                         tools:text="0"
                         />
                 <TextView

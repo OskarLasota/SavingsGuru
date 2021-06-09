@@ -19,7 +19,7 @@
     <string name="income">Income</string>
     <string name="expenses">Expenses</string>
     <string name="investment_to_savings">Investment to Savings Ratio</string>
-    <string name="currency">£</string>
+    <string name="currency">£%s</string>
     
     //settings
     <string name="notify_monthly">Monthly savings notification</string>
