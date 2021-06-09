@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@{String.format(@string/currency, viewmodel.scenario.income)}"
-                    tools:text="0"
+                    tools:text="£0"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@{String.format(@string/currency, viewmodel.scenario.expenses)}"
-                        tools:text="0"
+                        tools:text="£0"
                         />
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,14 +124,14 @@
                         android:layout_gravity="left"
                         android:layout_weight="1"
                         android:text="@{Integer.toString(viewmodel.scenario.savingsRatio)+'%'}"
-                        tools:text="0"
+                        tools:text="0%"
                         />
                     <TextView
                         android:id="@+id/tv_investment_ratio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="100"
+                        tools:text="100%"
                         android:text="@{Integer.toString(viewmodel.scenario.investmentRatio)+'%'}"
                         android:gravity="right"
                         android:layout_marginRight="20dp"
