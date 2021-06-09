@@ -23,7 +23,7 @@ class ScenarioFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scenario, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
@@ -33,31 +33,17 @@ class ScenarioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var id = arguments?.getInt("id") ?: 0
+        val id = arguments?.getInt("id") ?: throw IllegalArgumentException("Scenario ID not passed to ScenarioFragment::class")
         if(id != 0) {
             viewModel.getScenario(id)
         }
         setObservers()
     }
 
-    private fun initializeUI(scenario : Scenario){
-        var max = if(scenario.income > scenario.expenses) scenario.income else scenario.expenses
-        binding.pbIncome.max = max
-        binding.pbExpenses.max = max
-
-        binding.pbIncome.progress = scenario.income
-        binding.pbExpenses.progress = scenario.expenses
-        binding.pbInvestSavingsRatio.progress = scenario.savingsRatio
-
-        binding.tvExpenses.text = getString(R.string.currency) + scenario.expenses.toString()
-        binding.tvIncome.text = getString(R.string.currency) + scenario.income.toString()
-        binding.tvInvestmentRatio.text = scenario.investmentRatio.toString()
-        binding.tvSavingsRatio.text = scenario.savingsRatio.toString()
-    }
 
     private fun setObservers(){
         viewModel.scenario.observe(viewLifecycleOwner, {
-            initializeUI(it)
+
         })
         viewModel.error.observe(viewLifecycleOwner, {
 
