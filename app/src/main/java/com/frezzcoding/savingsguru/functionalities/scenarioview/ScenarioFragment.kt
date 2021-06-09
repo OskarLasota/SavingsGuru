@@ -27,6 +27,8 @@ class ScenarioFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scenario, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
+
+        setObservers()
         return binding.root
     }
 
@@ -34,10 +36,8 @@ class ScenarioFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = arguments?.getInt("id") ?: throw IllegalArgumentException("Scenario ID not passed to ScenarioFragment::class")
-        if(id != 0) {
-            viewModel.getScenario(id)
-        }
-        setObservers()
+
+        viewModel.getScenario(id)
     }
 
 
