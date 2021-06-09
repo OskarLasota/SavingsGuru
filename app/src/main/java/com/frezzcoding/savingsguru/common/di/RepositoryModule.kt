@@ -11,9 +11,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun bindNewScenarioRepo(repo : NewScenarioRepoImpl) : NewScenarioRepo
-
-    @Binds
     abstract fun bindScenarioRepo(repo : ScenarioRepoImpl) : ScenarioRepo
 
     @Binds

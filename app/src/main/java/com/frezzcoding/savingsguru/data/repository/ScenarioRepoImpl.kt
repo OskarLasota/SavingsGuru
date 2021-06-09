@@ -24,6 +24,9 @@ class ScenarioRepoImpl @Inject constructor(private val dao: ScenarioDao) : Scena
             return@defer dao.removeScenario(id)
         }
     }
+    override fun addScenario(scenario: Scenario) : Completable{
+        return dao.insert(scenario)
+    }
 
 
 }

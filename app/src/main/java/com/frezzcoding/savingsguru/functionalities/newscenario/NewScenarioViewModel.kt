@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.frezzcoding.savingsguru.common.AbstractViewModel
 import com.frezzcoding.savingsguru.data.models.Scenario
-import com.frezzcoding.savingsguru.data.repository.NewScenarioRepo
+import com.frezzcoding.savingsguru.data.repository.ScenarioRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewScenarioViewModel @Inject constructor(
-    var repo: NewScenarioRepo
+    var repo: ScenarioRepo
 ) : AbstractViewModel() {
 
     private val _success = MutableLiveData<Scenario>()

@@ -12,4 +12,5 @@ interface ScenarioRepo {
 
     fun removeScenario(id : Int) : Completable
 
+    fun addScenario(scenario: Scenario) : Completable
 }
