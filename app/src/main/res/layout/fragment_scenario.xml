@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,7 +9,7 @@
             type="com.frezzcoding.savingsguru.functionalities.scenarioview.ScenarioViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,6 +27,7 @@
             />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_scenario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -141,6 +143,58 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardview_scenario"
+            android:layout_margin="20dp"
+            android:text="@string/savings_goal"
+            style="@style/H3"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_calculate_goal"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            style="@style/OutlinedBox.Colorful"
+            app:startIconDrawable="@drawable/ic_money"
+            android:layout_margin="20dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_calculate_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="9"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_to_reach"
+            app:layout_constraintBottom_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/til_calculate_goal"
+            app:layout_constraintTop_toTopOf="@id/tv_subtitle" />
+
+        <TextView
+            android:id="@+id/tv_result_year"
+            style="@style/H2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/n_a"
+            app:layout_constraintBottom_toBottomOf="@id/til_calculate_goal"
+            app:layout_constraintLeft_toRightOf="@id/til_calculate_goal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/til_calculate_goal" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

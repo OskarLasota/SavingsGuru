@@ -20,6 +20,11 @@
     <string name="expenses">Expenses</string>
     <string name="investment_to_savings">Investment to Savings Ratio</string>
     <string name="currency">£%s</string>
+    <string name="calculate_goal">Calculate Goal</string>
+    <string name="years_until_goal">Years until goal reached?</string>
+    <string name="savings_goal">Savings Goal</string>
+    <string name="time_to_reach">Time to Reach</string>
+    <string name="n_a">n/a</string>
     
     //settings
     <string name="notify_monthly">Monthly savings notification</string>
