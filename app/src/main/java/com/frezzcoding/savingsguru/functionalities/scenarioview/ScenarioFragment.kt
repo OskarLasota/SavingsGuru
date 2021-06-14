@@ -46,9 +46,7 @@ class ScenarioFragment : Fragment() {
     }
 
     private fun setListeners(){
-        binding.etCalculateGoal.onTextChanged {
 
-        }
     }
 
 
