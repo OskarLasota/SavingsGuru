@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.common.onNonEmptyTextChangedOnlyNumbers
+import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.databinding.FragmentScenarioBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,7 @@ class ScenarioFragment : Fragment() {
     private val viewModel by viewModels<ScenarioViewModel>()
     private val TAG = "ScenarioFragment"
     private lateinit var binding : FragmentScenarioBinding
+    private lateinit var scenario : Scenario
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,14 +45,22 @@ class ScenarioFragment : Fragment() {
 
     private fun setListeners(){
         binding.etCalculateGoal.onNonEmptyTextChangedOnlyNumbers {
-            Log.d(TAG, it.toString())
+            if(it.isEmpty()){
+                binding.tvResultYear.text = getString(R.string.n_a)
+            }else{
+                binding.tvResultYear.text = calculateTimeToGoal(it.toInt()).toString()
+            }
         }
     }
 
+    private fun calculateTimeToGoal(goal : Int) : Int{
+        val result = goal / (scenario.income - scenario.expenses)
+        return if(result < 0) 0 else result
+    }
 
     private fun setObservers(){
         viewModel.scenario.observe(viewLifecycleOwner, {
-
+            scenario = it
         })
         viewModel.error.observe(viewLifecycleOwner, {
 

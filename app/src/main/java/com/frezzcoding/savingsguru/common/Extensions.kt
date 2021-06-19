@@ -28,14 +28,18 @@ fun List<Int>.lowestNumber(): Int? {
     }
 }
 
-fun EditText.onNonEmptyTextChangedOnlyNumbers(onTextChanged: (Int) -> Unit) {
+fun EditText.onNonEmptyTextChangedOnlyNumbers(onTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (!s.isNullOrEmpty() && s.matchesOnlyNumbers()) {
-                onTextChanged.invoke(s.toString().toInt())
+            s?.let {
+                if(s.isEmpty()){
+                    onTextChanged.invoke(s.toString())
+                }else if(s.matchesOnlyNumbers()){
+                    onTextChanged.invoke(s.toString())
+                }
             }
         }
 
