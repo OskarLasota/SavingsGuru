@@ -22,8 +22,8 @@
     <string name="currency">£%s</string>
     <string name="calculate_goal">Calculate Goal</string>
     <string name="years_until_goal">Years until goal reached?</string>
-    <string name="savings_goal">Savings Goal</string>
-    <string name="time_to_reach">Time to Reach</string>
+    <string name="savings_goal"><u>Savings Goal</u></string>
+    <string name="time_to_reach"><u>Time to Reach</u></string>
     <string name="n_a">n/a</string>
     
     //settings

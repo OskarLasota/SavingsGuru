@@ -146,14 +146,15 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
+            style="@style/H2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_scenario"
             android:layout_margin="20dp"
             android:text="@string/savings_goal"
-            style="@style/H3"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/til_calculate_goal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/til_calculate_goal"
+            app:layout_constraintTop_toBottomOf="@id/cardview_scenario" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_calculate_goal"
@@ -175,7 +176,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            style="@style/H3"
+            style="@style/H2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_to_reach"
