@@ -54,7 +54,7 @@ class ScenarioFragment : Fragment() {
     }
 
     private fun calculateTimeToGoal(goal : Int) : Int{
-        val result = goal / (scenario.income - scenario.expenses)
+        val result = goal / (if(scenario.income - scenario.expenses == 0) 1 else scenario.income - scenario.expenses)
         return if(result < 0) 0 else result
     }
 
