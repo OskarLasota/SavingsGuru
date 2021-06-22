@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +24,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setupViews(){
-        navController = Navigation.findNavController(this,
+    private fun setupViews() {
+        navController = Navigation.findNavController(
+            this,
             R.id.nav_host_fragment
         )
         setupBottomNavMenu(navController)
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBar(navController)
     }
 
-    private fun setupActionBar(navController: NavController){
+    private fun setupActionBar(navController: NavController) {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.homeFragment,
             R.id.settingsFragment,
@@ -60,7 +61,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = Navigation.findNavController(this,
+        val navController = Navigation.findNavController(
+            this,
             R.id.nav_host_fragment
         )
         val navigated = NavigationUI.onNavDestinationSelected(item, navController)

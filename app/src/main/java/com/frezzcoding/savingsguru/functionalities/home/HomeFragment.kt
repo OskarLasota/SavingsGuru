@@ -1,6 +1,5 @@
 package com.frezzcoding.savingsguru.functionalities.home
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,8 +22,8 @@ import kotlinx.android.synthetic.main.popup_savings_action.*
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
 
-    private lateinit var binding : FragmentHomeBinding
-    private lateinit var scenarioAdapter : ScenarioAdapter
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var scenarioAdapter: ScenarioAdapter
     private val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
@@ -43,9 +42,9 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
         viewModel.getScenarios()
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.loading.observe(viewLifecycleOwner, { loading ->
-            binding.homeProgressBar.visibility = if(loading) View.VISIBLE else View.GONE
+            binding.homeProgressBar.visibility = if (loading) View.VISIBLE else View.GONE
         })
         viewModel.error.observe(viewLifecycleOwner, { errorMessage ->
             Toast.makeText(this.context, errorMessage, Toast.LENGTH_SHORT).show()
@@ -55,7 +54,7 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
         })
     }
 
-    private fun setupAdapter(){
+    private fun setupAdapter() {
         scenarioAdapter = ScenarioAdapter(this)
         binding.recyclerScenario.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -64,9 +63,9 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
     }
 
     override fun onScenarioClick(id: Int) {
-        if(id == 0){
+        if (id == 0) {
             Navigation.findNavController(requireView()).navigate(R.id.addFragment)
-        }else{
+        } else {
             findNavController().navigate(
                 R.id.action_homeFragment_to_scenarioFragment, bundleOf("id" to id)
             )
@@ -75,12 +74,12 @@ class HomeFragment : Fragment(), ScenarioAdapter.ScenarioClickListener {
 
     override fun onLongScenarioClick(id: Int, position: Int) {
         var dialog = Dialog(requireContext())
-            dialog.setContentView(R.layout.popup_savings_action)
+        dialog.setContentView(R.layout.popup_savings_action)
         setActionDialogListeners(id, dialog)
         dialog.show()
     }
 
-    private fun setActionDialogListeners(id : Int, dialog: Dialog){
+    private fun setActionDialogListeners(id: Int, dialog: Dialog) {
         dialog.btn_open.setOnClickListener {
             dialog.dismiss()
             findNavController().navigate(
