@@ -58,9 +58,9 @@ class SettingsFragment : Fragment() {
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
             //isChecked shows the new checked status
             if (isChecked) {
-                viewModel.activateNotifications()
+                viewModel.activateNotifications(requireContext())
             } else {
-                viewModel.disableNotifications()
+                viewModel.disableNotifications(requireContext())
             }
             storeSelection(isChecked)
         }
