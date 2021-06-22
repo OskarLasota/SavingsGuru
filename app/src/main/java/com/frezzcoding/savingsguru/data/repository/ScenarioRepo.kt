@@ -6,11 +6,11 @@ import io.reactivex.Single
 
 interface ScenarioRepo {
 
-    fun getScenarios() : Single<List<Scenario>>
+    fun getScenarios(): Single<List<Scenario>>
 
-    fun getScenario(id : Int) : Single<Scenario>
+    fun getScenario(id: Int): Single<Scenario>
 
-    fun removeScenario(id : Int) : Completable
+    fun removeScenario(id: Int): Completable
 
-    fun addScenario(scenario: Scenario) : Completable
+    fun addScenario(scenario: Scenario): Completable
 }

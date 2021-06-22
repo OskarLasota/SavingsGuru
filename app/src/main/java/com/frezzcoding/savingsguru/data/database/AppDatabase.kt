@@ -9,19 +9,19 @@ import com.frezzcoding.savingsguru.data.models.Scenario
 
 
 @Database(entities = [Scenario::class, EstimatedSavings::class], version = 1, exportSchema = false)
-abstract class AppDatabase : RoomDatabase(){
+abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun scenarioDao() : ScenarioDao
-    abstract fun savingsDao() : SavingsDao
+    abstract fun scenarioDao(): ScenarioDao
+    abstract fun savingsDao(): SavingsDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context : Context): AppDatabase {
-            synchronized(this){
+        fun getInstance(context: Context): AppDatabase {
+            synchronized(this) {
                 var instance = INSTANCE
-                if(instance == null){
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,

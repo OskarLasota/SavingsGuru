@@ -4,7 +4,7 @@ import android.widget.SeekBar
 
 
 //enforcing interface segregation
-interface SeekBarOnProgressChanged : SeekBar.OnSeekBarChangeListener{
+interface SeekBarOnProgressChanged : SeekBar.OnSeekBarChangeListener {
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
 
     }

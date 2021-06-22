@@ -35,9 +35,9 @@ fun EditText.onNonEmptyTextChangedOnlyNumbers(onTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             s?.let {
-                if(s.isEmpty()){
+                if (s.isEmpty()) {
                     onTextChanged.invoke(s.toString())
-                }else if(s.matchesOnlyNumbers()){
+                } else if (s.matchesOnlyNumbers()) {
                     onTextChanged.invoke(s.toString())
                 }
             }

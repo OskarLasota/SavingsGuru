@@ -44,7 +44,12 @@ class NotificationManager(val context: Context) : BroadcastReceiver() {
     fun setupNewNotification() {
         val intent = Intent(context, NotificationManager::class.java)
         val pi =
-            PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                NOTIFICATION_ID,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.setRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -54,9 +59,14 @@ class NotificationManager(val context: Context) : BroadcastReceiver() {
         )
     }
 
-    fun disableNotifications(){
+    fun disableNotifications() {
         val intent = Intent(context, NotificationManager::class.java)
-        var pi =PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        var pi = PendingIntent.getBroadcast(
+            context,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.cancel(pi)
     }
