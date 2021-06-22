@@ -20,17 +20,17 @@ class SettingsFragmentInstrumentedTest {
     }
 
     @Test
+    fun switch_set_to_unchecked_on_default() {
+        onView(withId(R.id.switch_notification)).check(matches(isNotChecked()))
+    }
+
+    @Test
     fun all_ui_components_visible() {
         onView(withId(R.id.tv_settings_notifications)).check(matches(isDisplayed()))
         onView(withId(R.id.switch_notification)).check(matches(isDisplayed()))
         onView(withId(R.id.btn_clear_cache)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_clear_cache)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_settings)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun switch_set_to_unchecked_on_default() {
-        onView(withId(R.id.switch_notification)).check(matches(isNotChecked()))
     }
 
     @Test
