@@ -28,8 +28,10 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     private lateinit var binding: FragmentGraphBinding
     private lateinit var graphsAdapter: GraphsAdapter
     private val viewModel by viewModels<GraphsViewModel>()
+
     @Inject
     lateinit var hintManager: HintManager
+
     @Inject
     lateinit var spManager: SPManager
 
@@ -84,7 +86,7 @@ class GraphsFragment : Fragment(), GraphsAdapter.OnClickListenerSavings {
     }
 
     private fun initializeHints() {
-        if(!spManager.getHintGraphRemove()) {
+        if (!spManager.getHintGraphRemove()) {
             hintManager.showSwipeToRemoveHint()
             spManager.hintGraphRemoveActivated()
         }

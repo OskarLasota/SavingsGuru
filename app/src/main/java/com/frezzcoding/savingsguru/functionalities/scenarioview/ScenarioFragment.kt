@@ -1,7 +1,6 @@
 package com.frezzcoding.savingsguru.functionalities.scenarioview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +18,8 @@ class ScenarioFragment : Fragment() {
 
     private val viewModel by viewModels<ScenarioViewModel>()
     private val TAG = "ScenarioFragment"
-    private lateinit var binding : FragmentScenarioBinding
-    private lateinit var scenario : Scenario
+    private lateinit var binding: FragmentScenarioBinding
+    private lateinit var scenario: Scenario
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,27 +37,29 @@ class ScenarioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = arguments?.getInt("id") ?: throw IllegalArgumentException("Scenario ID not passed to ScenarioFragment::class")
+        val id = arguments?.getInt("id")
+            ?: throw IllegalArgumentException("Scenario ID not passed to ScenarioFragment::class")
 
         viewModel.getScenario(id)
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.etCalculateGoal.onNonEmptyTextChangedOnlyNumbers {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.tvResultYear.text = getString(R.string.n_a)
-            }else{
+            } else {
                 binding.tvResultYear.text = calculateTimeToGoal(it.toInt()).toString()
             }
         }
     }
 
-    private fun calculateTimeToGoal(goal : Int) : Int{
-        val result = goal / (if(scenario.income - scenario.expenses == 0) 1 else scenario.income - scenario.expenses)
-        return if(result < 0) 0 else result
+    private fun calculateTimeToGoal(goal: Int): Int {
+        val result =
+            goal / (if (scenario.income - scenario.expenses == 0) 1 else scenario.income - scenario.expenses)
+        return if (result < 0) 0 else result
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.scenario.observe(viewLifecycleOwner, {
             scenario = it
         })
@@ -69,7 +70,6 @@ class ScenarioFragment : Fragment() {
 
         })
     }
-
 
 
 }

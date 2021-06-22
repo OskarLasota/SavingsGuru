@@ -1,8 +1,6 @@
 package com.frezzcoding.savingsguru.functionalities.settings
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +17,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
-    private lateinit var binding : FragmentSettingsBinding
+    private lateinit var binding: FragmentSettingsBinding
     private val viewModel by viewModels<SettingsViewModel>()
+
     @Inject
-    lateinit var spManager : SPManager
+    lateinit var spManager: SPManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +30,7 @@ class SettingsFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_settings , container, false
+            R.layout.fragment_settings, container, false
         )
         return binding.root
     }
@@ -43,24 +42,24 @@ class SettingsFragment : Fragment() {
         initialiseUI()
     }
 
-    private fun initialiseUI(){
+    private fun initialiseUI() {
         binding.switchNotification.isChecked = spManager.getNotificationIsSwitchedOn()
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.clearSuccess.observe(viewLifecycleOwner, {
-            if(it){
+            if (it) {
                 showInformationDialog()
             }
         })
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
             //isChecked shows the new checked status
-            if(isChecked){
+            if (isChecked) {
                 viewModel.activateNotifications()
-            }else{
+            } else {
                 viewModel.disableNotifications()
             }
             storeSelection(isChecked)
@@ -70,7 +69,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun showInformationDialog(){
+    private fun showInformationDialog() {
         var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             .setTitle("")
             .setMessage(R.string.cache_cleared)
@@ -78,7 +77,7 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
-    private fun showConfirmDialog(){
+    private fun showConfirmDialog() {
         var dialog = AlertDialog.Builder(context, R.style.AlertDialogTheme)
             .setTitle(R.string.confirm_cache_removal)
             .setMessage(R.string.info_cache_removal)
@@ -89,7 +88,7 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
-    private fun storeSelection(isChecked : Boolean){
+    private fun storeSelection(isChecked: Boolean) {
         spManager.setNotificationSwitchState(isChecked)
     }
 
