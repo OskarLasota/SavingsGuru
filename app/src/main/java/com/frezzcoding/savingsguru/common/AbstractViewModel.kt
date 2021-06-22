@@ -11,7 +11,7 @@ abstract class AbstractViewModel : ViewModel() {
 
     protected val disposables = CompositeDisposable()
 
-    init{
+    init {
         Timber.d("ViewModel: %s", this)
     }
 

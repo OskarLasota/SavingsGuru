@@ -11,20 +11,20 @@ import io.reactivex.Single
 @Dao
 interface SavingsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(savings: EstimatedSavings) : Completable
+    fun insert(savings: EstimatedSavings): Completable
 
     @Query("SELECT * FROM table_savings")
-    fun getSavings() : Single<List<EstimatedSavings>>
+    fun getSavings(): Single<List<EstimatedSavings>>
 
     @Query("UPDATE table_savings SET lastEntry =:status WHERE id=:id")
-    fun updateEntryStatus(id : Int, status : Boolean) : Completable
+    fun updateEntryStatus(id: Int, status: Boolean): Completable
 
     @Query("UPDATE table_savings SET amount =:amount WHERE id=:id")
-    fun updateSavingsAmount(id: Int, amount: Int) : Completable
+    fun updateSavingsAmount(id: Int, amount: Int): Completable
 
     @Query("DELETE from table_savings")
-    fun clearTable() : Completable
+    fun clearTable(): Completable
 
     @Query("DELETE from table_savings WHERE id =:id")
-    fun removeSavings(id: Int) : Completable
+    fun removeSavings(id: Int): Completable
 }

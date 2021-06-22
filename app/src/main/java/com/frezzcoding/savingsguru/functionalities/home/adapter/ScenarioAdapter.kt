@@ -9,9 +9,10 @@ import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.data.models.Scenario
 import com.frezzcoding.savingsguru.databinding.ItemScenarioBinding
 
-class ScenarioAdapter(val listener : ScenarioClickListener) : ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUtil()) {
+class ScenarioAdapter(val listener: ScenarioClickListener) :
+    ListAdapter<Scenario, ScenarioViewHolder>(ScenarioDiffUtil()) {
 
-    private lateinit var binding : ItemScenarioBinding
+    private lateinit var binding: ItemScenarioBinding
 
     class ScenarioDiffUtil : DiffUtil.ItemCallback<Scenario>() {
         override fun areItemsTheSame(oldItem: Scenario, newItem: Scenario): Boolean {
@@ -25,7 +26,7 @@ class ScenarioAdapter(val listener : ScenarioClickListener) : ListAdapter<Scenar
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScenarioViewHolder {
-        val inflater : LayoutInflater = LayoutInflater.from(parent.context)
+        val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         binding = DataBindingUtil.inflate(inflater, R.layout.item_scenario, parent, false)
 
         return ScenarioViewHolder(binding)
@@ -44,9 +45,9 @@ class ScenarioAdapter(val listener : ScenarioClickListener) : ListAdapter<Scenar
         }
     }
 
-    interface ScenarioClickListener{
-        fun onScenarioClick(id : Int)
-        fun onLongScenarioClick(id : Int, position: Int)
+    interface ScenarioClickListener {
+        fun onScenarioClick(id: Int)
+        fun onLongScenarioClick(id: Int, position: Int)
     }
 
 }

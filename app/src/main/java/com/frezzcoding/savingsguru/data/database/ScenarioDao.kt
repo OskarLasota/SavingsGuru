@@ -12,19 +12,19 @@ import io.reactivex.Single
 interface ScenarioDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(scenario: Scenario) : Completable
+    fun insert(scenario: Scenario): Completable
 
     @Query("SELECT * FROM table_scenarios")
-    fun getScenarios() : Single<List<Scenario>>
+    fun getScenarios(): Single<List<Scenario>>
 
     @Query("SELECT * FROM table_scenarios WHERE id =:id")
-    fun getScenario(id : Int) : Single<Scenario>
+    fun getScenario(id: Int): Single<Scenario>
 
     @Query("DELETE FROM table_scenarios WHERE id=:id")
-    fun removeScenario(id : Int) : Completable
+    fun removeScenario(id: Int): Completable
 
     @Query("DELETE from table_scenarios")
-    fun clearTable() : Completable
+    fun clearTable(): Completable
 
 
 }

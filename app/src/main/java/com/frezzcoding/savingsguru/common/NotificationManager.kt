@@ -11,11 +11,13 @@ import com.frezzcoding.savingsguru.MainActivity
 import com.frezzcoding.savingsguru.R
 import java.util.*
 
-class NotificationManager(val context: Context) : BroadcastReceiver() {
+class NotificationManager : BroadcastReceiver() {
 
-    private val TIME_IN_MONTH = 2_629_743_833L
-    private val NOTIFICATION_ID = 200
 
+    companion object{
+        const val NOTIFICATION_ID = 200
+        const val TIME_IN_MONTH = 2_629_743_833L
+    }
 
     override fun onReceive(context: Context, intent: Intent?) {
         val builder: NotificationCompat.Builder =
@@ -35,16 +37,21 @@ class NotificationManager(val context: Context) : BroadcastReceiver() {
 
         val notificationManager = NotificationManagerCompat.from(context)
 
-        setupNewNotification()
+        setupNewNotification(context)
 
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
 
-    fun setupNewNotification() {
+    fun setupNewNotification(context : Context) {
         val intent = Intent(context, NotificationManager::class.java)
         val pi =
-            PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                NOTIFICATION_ID,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.setRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -54,11 +61,5 @@ class NotificationManager(val context: Context) : BroadcastReceiver() {
         )
     }
 
-    fun disableNotifications(){
-        val intent = Intent(context, NotificationManager::class.java)
-        var pi =PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT)
-        val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        am.cancel(pi)
-    }
 
 }

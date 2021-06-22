@@ -44,6 +44,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_settings_notifications"
             app:layout_constraintBottom_toBottomOf="@id/tv_settings_notifications"
             android:layout_margin="20dp"
+            android:checked="false"
             />
 
         <TextView

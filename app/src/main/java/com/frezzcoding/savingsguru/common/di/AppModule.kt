@@ -10,7 +10,6 @@ import com.frezzcoding.savingsguru.common.SPManager
 import com.frezzcoding.savingsguru.data.database.AppDatabase
 import com.frezzcoding.savingsguru.data.database.SavingsDao
 import com.frezzcoding.savingsguru.data.database.ScenarioDao
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext appContext: Context) : AppDatabase{
+    fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, "database").build()
     }
 
@@ -37,33 +36,30 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSPManager(context: Context, sharedPreferences: SharedPreferences) = SPManager(context, sharedPreferences)
+    fun provideSPManager(context: Context, sharedPreferences: SharedPreferences) =
+        SPManager(context, sharedPreferences)
 
     @Provides
     @Singleton
     fun provideHintManager(context: Context) = HintManager(context)
 
     @Provides
-    fun provideScenarioDao(database: AppDatabase) : ScenarioDao{
+    fun provideScenarioDao(database: AppDatabase): ScenarioDao {
         return database.scenarioDao()
     }
 
     @Provides
-    fun provideSavingsDao(database: AppDatabase) : SavingsDao{
+    fun provideSavingsDao(database: AppDatabase): SavingsDao {
         return database.savingsDao()
     }
 
     @Provides
-    fun provideCompositeDisposable() : CompositeDisposable {
+    fun provideCompositeDisposable(): CompositeDisposable {
         return CompositeDisposable()
     }
 
     @Provides
-    fun provideNotificationManager(context: Context) : NotificationManager {
-        return NotificationManager(context)
-    }
-
-    @Provides
-    fun provideSharedPreferences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    fun provideSharedPreferences(context: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
 
 }

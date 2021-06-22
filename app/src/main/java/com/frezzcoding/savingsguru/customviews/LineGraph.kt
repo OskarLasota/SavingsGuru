@@ -13,19 +13,19 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
 
     private var linePaint: Paint
     private var mBlackPaint: Paint
-    private var plotPaint : Paint
-    private var gradientPaint : Paint
+    private var plotPaint: Paint
+    private var gradientPaint: Paint
     private var mPath: Path
     private var dataPoints = listOf<Int>() //make data object to hold date & value
-    private var highestValue : Int = 0
-    private var lowestValue : Int = 0
-    private var amountOfValues : Int = 0
+    private var highestValue: Int = 0
+    private var lowestValue: Int = 0
+    private var amountOfValues: Int = 0
     private var zeroY = 0F
 
-    private var widthPerItem : Float = 0F
-    private var heightPerValue : Float = 0F
-    private var paddingForButtons : Float = 0f
-    private var graduationPadding : Float = 100f
+    private var widthPerItem: Float = 0F
+    private var heightPerValue: Float = 0F
+    private var paddingForButtons: Float = 0f
+    private var graduationPadding: Float = 100f
     private var amountOfGraduations = 6
     private var highestY = 0f
     private var widthPerValueDigit = 5
@@ -49,7 +49,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         dataPoints.lowestNumber()?.let { lowestNumber ->
             lowestValue = lowestNumber
         }
-        if(highestValue - lowestValue < 0){
+        if (highestValue - lowestValue < 0) {
             //handle divide by zero error
             handleError()
         }
@@ -57,21 +57,22 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         invalidate()
     }
 
-    private fun handleError(){
+    private fun handleError() {
 
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         //draw different type of graph for smaller than 1 values, draw only line graph
-        if(lowestValue < 0){
+        if (lowestValue < 0) {
             //notify that graph does not support negative numbers
-        }else if (dataPoints.size < 2) {
+        } else if (dataPoints.size < 2) {
             //handle empty graph
-        }else {
-            widthPerItem = ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues) - (highestValue.toString().length * widthPerValueDigit)
+        } else {
+            widthPerItem =
+                ((width - paddingLeft - paddingRight - graduationPadding) / amountOfValues) - (highestValue.toString().length * widthPerValueDigit)
             val totalHeight = (height - paddingTop - paddingBottom).toFloat()
-            heightPerValue = totalHeight/highestValue
+            heightPerValue = totalHeight / highestValue
             zeroY = (height - paddingBottom).toFloat()
             initializePaint()
             drawGraphPlotAndLines(canvas)
@@ -80,36 +81,46 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         }
     }
 
-    private fun drawGraduations(canvas: Canvas?){
+    private fun drawGraduations(canvas: Canvas?) {
         val x = (widthPerItem * amountOfValues.toFloat()) + paddingRight
-        var y : Float
+        var y: Float
         val padding = 20
         val textPaint = Paint()
         textPaint.color = Color.GRAY
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textSize = 40F
-        for(i in 0..amountOfGraduations){
-            y = zeroY - ((((zeroY - highestY)/ amountOfGraduations) * i) )
-            if(i != 0){
-                canvas?.drawText(((highestValue.toDouble() / amountOfGraduations) * i).toInt().toString(), x + padding, y, textPaint)
+        for (i in 0..amountOfGraduations) {
+            y = zeroY - ((((zeroY - highestY) / amountOfGraduations) * i))
+            if (i != 0) {
+                canvas?.drawText(
+                    ((highestValue.toDouble() / amountOfGraduations) * i).toInt().toString(),
+                    x + padding,
+                    y,
+                    textPaint
+                )
                 drawAxis(canvas, y)
-            }else{
-                canvas?.drawText(0.toString(), x+padding, y, textPaint)
+            } else {
+                canvas?.drawText(0.toString(), x + padding, y, textPaint)
             }
         }
-        canvas?.drawText(highestValue.toString(), x+padding, zeroY - ((zeroY / amountOfGraduations) * 7), textPaint)
+        canvas?.drawText(
+            highestValue.toString(),
+            x + padding,
+            zeroY - ((zeroY / amountOfGraduations) * 7),
+            textPaint
+        )
     }
 
-    private fun drawAxis(canvas: Canvas?, yAxis : Float) {
+    private fun drawAxis(canvas: Canvas?, yAxis: Float) {
         val dottedPaint = Paint()
         dottedPaint.style = Paint.Style.STROKE
         dottedPaint.strokeWidth = 3F
         dottedPaint.pathEffect = DashPathEffect(floatArrayOf(22F, 22F), 0f)
 
-        for(i in 1..(width*0.9).toInt() step width / 10){
+        for (i in 1..(width * 0.9).toInt() step width / 10) {
             mPath.reset()
             mPath.moveTo(i.toFloat(), yAxis)
-            mPath.lineTo(i+20f, yAxis)
+            mPath.lineTo(i + 20f, yAxis)
             canvas?.drawPath(mPath, dottedPaint)
         }
 
@@ -146,7 +157,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
      */
 
-    private fun initializePaint(){
+    private fun initializePaint() {
         mBlackPaint.color = Color.BLACK
         mBlackPaint.style = Paint.Style.STROKE
         mBlackPaint.strokeWidth = 10F
@@ -158,7 +169,7 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         //prepare gradient
         val colors = intArrayOf(R.color.purple_500, R.color.green)
         val gradient = LinearGradient(
-                widthPerItem, paddingTop.toFloat(), 0f, zeroY, colors, null, Shader.TileMode.CLAMP
+            widthPerItem, paddingTop.toFloat(), 0f, zeroY, colors, null, Shader.TileMode.CLAMP
         )
         gradientPaint.style = Paint.Style.FILL
         gradientPaint.shader = gradient
@@ -166,18 +177,20 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
         plotPaint.color = ContextCompat.getColor(context, R.color.blue)
     }
 
-    private fun drawGraphFilling(canvas: Canvas?){
+    private fun drawGraphFilling(canvas: Canvas?) {
         mPath.reset()
         mPath.moveTo(paddingLeft.toFloat() + 0f, zeroY - paddingForButtons)
         var iteration = 1
         dataPoints.forEach {
-            mPath.lineTo(widthPerItem * iteration + paddingLeft, zeroY - (it.toFloat() * heightPerValue) - paddingForButtons)
-            iteration ++
+            mPath.lineTo(
+                widthPerItem * iteration + paddingLeft,
+                zeroY - (it.toFloat() * heightPerValue) - paddingForButtons
+            )
+            iteration++
         }
         mPath.lineTo((widthPerItem * amountOfValues + paddingLeft), zeroY - paddingForButtons)
         canvas?.drawPath(mPath, gradientPaint)
     }
-
 
 
     /*
@@ -199,14 +212,14 @@ class LineGraph(context: Context, attrs: AttributeSet? = null) : View(context, a
     }
      */
 
-    private fun drawGraphPlotAndLines(canvas: Canvas?){
+    private fun drawGraphPlotAndLines(canvas: Canvas?) {
         mPath.reset()
         var originX = widthPerItem + paddingLeft
         val originY = zeroY - paddingForButtons
         mPath.moveTo(0f + paddingLeft, originY)
 
-        dataPoints.forEach{
-            if(it == highestValue){
+        dataPoints.forEach {
+            if (it == highestValue) {
                 highestY = originY - (it * heightPerValue)
             }
             mPath.lineTo(originX, originY - (it * heightPerValue))

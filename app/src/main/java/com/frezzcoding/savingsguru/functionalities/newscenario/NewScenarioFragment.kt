@@ -41,12 +41,16 @@ class NewScenarioFragment : Fragment() {
         setListeners()
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.error.observe(viewLifecycleOwner, {
             Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.success.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), getString(R.string.entry_added, it.title), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.entry_added, it.title),
+                Toast.LENGTH_SHORT
+            ).show()
             findNavController().navigate(R.id.action_addFragment_to_homeFragment)
         })
     }
@@ -76,7 +80,7 @@ class NewScenarioFragment : Fragment() {
 
 
     private fun addEntry() {
-        if(validateInput()) {
+        if (validateInput()) {
             viewModel.addScenario(
                 Scenario(
                     0,
@@ -90,16 +94,16 @@ class NewScenarioFragment : Fragment() {
         }
     }
 
-    private fun validateInput() : Boolean {
-        if(binding.etTitle.text.toString().isNullOrEmpty()){
+    private fun validateInput(): Boolean {
+        if (binding.etTitle.text.toString().isNullOrEmpty()) {
             viewModel.sendErrorMessage(getString(R.string.error_title_empty))
             return false
         }
-        if(binding.etMonthlyExpenses.text.toString().isNullOrEmpty()){
+        if (binding.etMonthlyExpenses.text.toString().isNullOrEmpty()) {
             viewModel.sendErrorMessage(getString(R.string.error_expenses_empty))
             return false
         }
-        if(binding.etMonthlyIncome.text.toString().isNullOrEmpty()){
+        if (binding.etMonthlyIncome.text.toString().isNullOrEmpty()) {
             viewModel.sendErrorMessage(getString(R.string.error_income_empty))
             return false
         }
