@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="estimatedSavings"
             type="com.frezzcoding.savingsguru.data.models.EstimatedSavings" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_savings_amount"
+            style="@style/OutlinedBox.Colorful"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/ic_money"
-            style="@style/OutlinedBox.Colorful"
-            >
+            app:startIconDrawable="@drawable/ic_money">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_savings_amount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"
-                android:maxLength="9"
-                />
+                android:maxLength="9" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,27 +37,25 @@
             android:id="@+id/tv_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/til_savings_amount"
-            app:layout_constraintTop_toTopOf="@id/til_savings_amount"
-            app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
             android:layout_marginLeft="20dp"
+            android:text="@string/confirm"
             android:textColor="@color/blue"
             android:visibility="@{estimatedSavings.lastEntry ? View.VISIBLE : View.GONE}"
-            android:text="@string/confirm"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/til_savings_amount"
+            app:layout_constraintLeft_toRightOf="@id/til_savings_amount"
+            app:layout_constraintTop_toTopOf="@id/til_savings_amount" />
 
         <TextView
             android:id="@+id/tv_addAnother"
+            style="@style/H4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/til_savings_amount"
-            app:layout_constraintLeft_toLeftOf="@id/til_savings_amount"
-            app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/H4"
-            android:visibility="gone"
-            android:textColor="@color/blue"
             android:text="@string/add_another"
-            />
+            android:textColor="@color/blue"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/til_savings_amount"
+            app:layout_constraintTop_toBottomOf="@id/til_savings_amount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
