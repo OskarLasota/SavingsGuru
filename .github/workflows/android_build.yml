@@ -1,6 +1,10 @@
 name: Android Build
 
-on: pull_request
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -15,16 +19,16 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: grant gradlew permission
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
-      - name: Run Tests
-        run: ./gradlew test
 
       - name: Build project
         run: ./gradlew assemble
 
-      - name: Build and push Docker Image
+      - name: Run Tests
+        run: ./gradlew test
+
+      - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
           image: frezzysmite/savingsguru
