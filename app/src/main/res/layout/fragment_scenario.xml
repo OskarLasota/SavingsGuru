@@ -170,6 +170,7 @@
                 android:id="@+id/et_calculate_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ems="9"
                 android:inputType="number"
                 android:maxLength="9"
                 />
@@ -188,9 +189,11 @@
         <TextView
             android:id="@+id/tv_result_year"
             style="@style/H2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/n_a"
+            android:maxLines="2"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/til_calculate_goal"
             app:layout_constraintLeft_toRightOf="@id/til_calculate_goal"
             app:layout_constraintRight_toRightOf="parent"

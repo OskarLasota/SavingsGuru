@@ -25,6 +25,8 @@
     <string name="savings_goal"><u>Savings Goal</u></string>
     <string name="time_to_reach"><u>Time to Reach</u></string>
     <string name="n_a">n/a</string>
+    <string name="months">months</string>
+    <string name="years_and_months">%s years and %s months</string>
     
     //settings
     <string name="notify_monthly">Monthly savings notification</string>

@@ -48,8 +48,19 @@ class ScenarioFragment : Fragment() {
             if (it.isEmpty()) {
                 binding.tvResultYear.text = getString(R.string.n_a)
             } else {
-                binding.tvResultYear.text = calculateTimeToGoal(it.toInt()).toString()
+                var months = calculateTimeToGoal(it.toInt())
+                binding.tvResultYear.text = mapMonthsIntoYears(months)
             }
+        }
+    }
+
+    private fun mapMonthsIntoYears(months : Int) : String{
+        return if(months < 12){
+            "$months ${getString(R.string.months)}"
+        }else{
+            var years = months / 12
+            var remeinder = months % 12
+            "${getString(R.string.years_and_months, years.toString(), remeinder.toString())}"
         }
     }
 
