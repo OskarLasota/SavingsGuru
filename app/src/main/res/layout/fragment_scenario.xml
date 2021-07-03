@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.frezzcoding.savingsguru.functionalities.scenarioview.ScenarioViewModel" />
@@ -15,129 +16,127 @@
 
         <TextView
             android:id="@+id/tv_title"
+            style="@style/H1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="@{viewmodel.scenario.title}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:maxLines="2"
-            android:text="@{viewmodel.scenario.title}"
-            style="@style/H1"
-            tools:text="example title"
-            />
+            tools:text="example title" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview_scenario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
             android:layout_margin="20dp"
             app:cardElevation="5dp"
-            >
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/income"
                     android:layout_marginTop="10dp"
-                    />
+                    android:text="@string/income" />
+
                 <ProgressBar
                     android:id="@+id/pb_income"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
                     android:max="@{viewmodel.scenario.income > viewmodel.scenario.expenses ? viewmodel.scenario.income : viewmodel.scenario.expenses}"
                     android:progress="@{viewmodel.scenario.income}"
-                    tools:progress="50"
-                    />
+                    tools:progress="50" />
+
                 <TextView
                     android:id="@+id/tv_income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@{String.format(@string/currency, viewmodel.scenario.income)}"
-                    tools:text="£0"
-                    />
+                    tools:text="£0" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/expenses"
                     android:layout_marginTop="10dp"
-                    />
+                    android:text="@string/expenses" />
+
                 <ProgressBar
                     android:id="@+id/pb_expenses"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
-                    tools:progress="50"
+                    android:layout_marginRight="20dp"
                     android:max="@{viewmodel.scenario.income > viewmodel.scenario.expenses ? viewmodel.scenario.income : viewmodel.scenario.expenses}"
                     android:progress="@{viewmodel.scenario.expenses}"
-                    />
-                    <TextView
-                        android:id="@+id/tv_expenses"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@{String.format(@string/currency, viewmodel.scenario.expenses)}"
-                        tools:text="£0"
-                        />
+                    tools:progress="50" />
+
+                <TextView
+                    android:id="@+id/tv_expenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{String.format(@string/currency, viewmodel.scenario.expenses)}"
+                    tools:text="£0" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/savings_to_invest_ratio"
                     android:layout_marginTop="10dp"
-                    />
+                    android:text="@string/savings_to_invest_ratio" />
+
                 <ProgressBar
                     android:id="@+id/pb_invest_savings_ratio"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
                     android:progress="@{viewmodel.scenario.savingsRatio}"
-                    tools:progress="50"
-                    />
+                    tools:progress="50" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="10dp"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_savings_ratio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:layout_gravity="left"
+                        android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:text="@{Integer.toString(viewmodel.scenario.savingsRatio)+'%'}"
-                        tools:text="0%"
-                        />
+                        tools:text="0%" />
+
                     <TextView
                         android:id="@+id/tv_investment_ratio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="100%"
-                        android:text="@{Integer.toString(viewmodel.scenario.investmentRatio)+'%'}"
-                        android:gravity="right"
                         android:layout_marginRight="20dp"
-                        />
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@{Integer.toString(viewmodel.scenario.investmentRatio)+'%'}"
+                        tools:text="100%" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -158,22 +157,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_calculate_goal"
+            style="@style/OutlinedBox.Colorful"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
-            style="@style/OutlinedBox.Colorful"
-            app:startIconDrawable="@drawable/ic_money"
-            android:layout_margin="20dp"
-            >
+            app:startIconDrawable="@drawable/ic_money">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_calculate_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="9"
                 android:inputType="number"
-                android:maxLength="9"
-                />
+                android:maxLength="9" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -182,8 +180,8 @@
             android:layout_height="wrap_content"
             android:text="@string/time_to_reach"
             app:layout_constraintBottom_toBottomOf="@id/tv_subtitle"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/til_calculate_goal"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_subtitle" />
 
         <TextView
@@ -198,7 +196,6 @@
             app:layout_constraintLeft_toRightOf="@id/til_calculate_goal"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/til_calculate_goal" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
