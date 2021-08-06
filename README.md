@@ -1,5 +1,9 @@
 # SavingsGuru
 
+## Kanban Board with Roadmap ( Feel free to contribute ) 
+
+https://github.com/OskarLasota/SavingsGuru/projects/1
+
 ##
 
 ## Tech Stack & Open-Library Sources : 
@@ -29,10 +33,6 @@
   
 + Retrofit2 & Gson - Also implementing the REST API with NodeJS
 
-
-## Kanban Board with Roadmap ( Feel free to contribute ) 
-
-https://github.com/OskarLasota/SavingsGuru/projects/1
 
 ## Google play store listing
 
