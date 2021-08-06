@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.frezzcoding.savingsguru.MainActivity
 import com.frezzcoding.savingsguru.R
 import com.frezzcoding.savingsguru.common.onNonEmptyTextChangedOnlyNumbers
 import com.frezzcoding.savingsguru.data.models.Scenario
@@ -31,7 +33,13 @@ class ScenarioFragment : Fragment() {
         binding.viewmodel = viewModel
         setListeners()
         setObservers()
+        (activity as MainActivity).showToolbarTitle(false)
         return binding.root
+    }
+
+    override fun onDestroy() {
+        (activity as MainActivity).showToolbarTitle(true)
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,7 +56,7 @@ class ScenarioFragment : Fragment() {
             if (it.isEmpty()) {
                 binding.tvResultYear.text = getString(R.string.n_a)
             } else {
-                var months = calculateTimeToGoal(it.toInt())
+                val months = calculateTimeToGoal(it.toInt())
                 binding.tvResultYear.text = mapMonthsIntoYears(months)
             }
         }
@@ -58,8 +66,8 @@ class ScenarioFragment : Fragment() {
         return if(months < 12){
             "$months ${getString(R.string.months)}"
         }else{
-            var years = months / 12
-            var remeinder = months % 12
+            val years = months / 12
+            val remeinder = months % 12
             "${getString(R.string.years_and_months, years.toString(), remeinder.toString())}"
         }
     }

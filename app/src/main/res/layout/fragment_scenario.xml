@@ -16,10 +16,12 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/H1"
+            style="@style/H2"
+            android:layout_margin="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="2"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="@{viewmodel.scenario.title}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -145,14 +147,12 @@
 
         <TextView
             android:id="@+id/tv_subtitle"
-            style="@style/H2"
+            style="@style/H3Big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="@string/savings_goal"
-            app:layout_constraintEnd_toEndOf="@+id/til_calculate_goal"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/til_calculate_goal"
             app:layout_constraintTop_toBottomOf="@id/cardview_scenario" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -175,7 +175,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            style="@style/H2"
+            style="@style/H3Big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_to_reach"
@@ -186,7 +186,7 @@
 
         <TextView
             android:id="@+id/tv_result_year"
-            style="@style/H2"
+            style="@style/H3Big"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/n_a"

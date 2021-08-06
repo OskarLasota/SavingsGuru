@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setupViews()
-
     }
 
     private fun setupViews() {
@@ -32,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavMenu(navController)
         setSupportActionBar(toolbar)
         setupActionBar(navController)
+    }
+
+    fun showToolbarTitle(show : Boolean){
+        supportActionBar?.setDisplayShowTitleEnabled(show)
     }
 
     private fun setupActionBar(navController: NavController) {
