@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +24,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        navController = Navigation.findNavController(
-            this,
-            R.id.nav_host_fragment
-        )
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         setupBottomNavMenu(navController)
         setSupportActionBar(toolbar)
         setupActionBar(navController)
@@ -63,10 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = Navigation.findNavController(
-            this,
-            R.id.nav_host_fragment
-        )
         val navigated = NavigationUI.onNavDestinationSelected(item, navController)
         return navigated || super.onOptionsItemSelected(item)
     }
