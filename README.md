@@ -1,5 +1,7 @@
 # SavingsGuru
 
+# development temporarily paused
+
 ## Kanban Board with Roadmap ( Feel free to contribute ) 
 
 https://github.com/OskarLasota/SavingsGuru/projects/1
